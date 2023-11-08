@@ -4,7 +4,7 @@ const posts = [1, 2, 3];
 
 export default function Featured() {
   return (
-    <section className=" w-full  text-xl  text-zinc-700">
+    <section className="p-4 w-full  text-xl  text-zinc-700 max-w-7xl sm:w-[90%] mx-auto">
       <h1 className="mb-4 font-bold">Featured Blog Posts</h1>
       <div className="grid md:grid-cols-2 gap-8 w-full">
         {posts.map((_, i) => (
