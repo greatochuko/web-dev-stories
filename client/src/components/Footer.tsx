@@ -4,7 +4,7 @@ import NewsLetterForm from "./NewsLetterForm";
 
 export default function Footer() {
   return (
-    <footer className="bg-zinc-900 text-white ">
+    <footer className="text-white bg-zinc-900 ">
       <div className="max-w-7xl w-[90%] mx-auto p-4 md:p-6 flex flex-col md:flex-row justify-between gap-4 border-b">
         <div className="flex gap-2">
           <img src="/favicon.png" alt="logo" className="h-12 invert" />
@@ -15,7 +15,7 @@ export default function Footer() {
           <NewsLetterForm background="black" />
         </div>
         <div>
-          <h2 className="font-semibold text-lg mb-2">Connect With Us</h2>
+          <h2 className="mb-2 text-lg font-semibold">Connect With Us</h2>
           <ul className="flex flex-col gap-4 md:flex-row">
             <li>
               <a
@@ -24,7 +24,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                <i className="fa-brands fa-linkedin mr-2"></i>Linkedin
+                <i className="mr-2 fa-brands fa-linkedin"></i>Linkedin
               </a>
             </li>
             <li>
@@ -34,7 +34,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                <i className="fa-brands fa-twitter mr-2"></i>Twitter
+                <i className="mr-2 fa-brands fa-twitter"></i>Twitter
               </a>
             </li>
             <li>
@@ -44,7 +44,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                <i className="fa-brands fa-github mr-2"></i>Github
+                <i className="mr-2 fa-brands fa-github"></i>Github
               </a>
             </li>
             <li>
@@ -54,7 +54,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                <i className="fa-solid fa-laptop mr-2"></i>Website
+                <i className="mr-2 fa-solid fa-laptop"></i>Website
               </a>
             </li>
           </ul>

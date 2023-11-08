@@ -7,7 +7,7 @@ export default function NewsLetterForm({ background }: NewsLetterFormProps) {
   const fg = background === "black" ? "white" : "zinc-900";
   const border = background === "black" ? "zinc-200" : "zinc-900";
   return (
-    <form className="flex flex-col md:flex-row gap-4 max-w-lg w-full">
+    <form className="flex flex-col w-full max-w-lg gap-4 md:flex-row">
       <input
         type="email"
         placeholder="Enter your email"
