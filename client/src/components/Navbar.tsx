@@ -5,11 +5,11 @@ export default function Navbar() {
   const [navIsOpen, setNavIsOpen] = useState(false);
 
   return (
-    <header className="fixed w-full top-0">
+    <header className="fixed w-full top-0 z-10 bg-white">
       <nav className="h-14 shadow-md flex justify-between items-center py-2 px-4 sm:px-8">
         <img src="/logo.png" alt="logo" className="h-full" />
         <ul
-          className={`gap-6 items-center text-zinc-600 top-[60px] pt-4 sm:pt-0 duration-300 absolute sm:static sm:bg-transparent flex flex-col w-44 h-screen  bg-white shadow-md pb-4 sm:pb-0 sm:w-fit sm:flex-row  sm:shadow-none ${
+          className={`gap-6 items-center text-zinc-600 top-[60px] pt-4 sm:pt-0 duration-300 absolute sm:static sm:bg-transparent flex flex-col w-44 h-screen sm:h-fit  bg-white shadow-md pb-4 sm:pb-0 sm:w-fit sm:flex-row  sm:shadow-none ${
             navIsOpen ? "right-0" : " -right-full"
           }`}
         >
