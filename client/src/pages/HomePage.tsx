@@ -6,9 +6,9 @@ export default function HomePage() {
   return (
     <main className="flex flex-col ">
       <Featured />
+      <NewsLetter />
       <PostGrid title="Latest" url="/posts/?sortBy=latest" />
       <PostGrid title="Popular" url="/posts/?sortBy=popular" />
-      <NewsLetter />
     </main>
   );
 }
