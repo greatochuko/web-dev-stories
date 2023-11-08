@@ -4,8 +4,8 @@ const posts = [1, 2, 3];
 
 export default function Featured() {
   return (
-    <section className="p-4 w-full  text-xl  text-zinc-700 max-w-7xl sm:w-[90%] mx-auto">
-      <h1 className="mb-4 font-bold">Featured Blog Posts</h1>
+    <section className="p-4 w-full  text-zinc-700 max-w-7xl sm:w-[90%] mx-auto mb-8">
+      <h1 className="mb-4 font-bold text-2xl">Featured Blog Posts</h1>
       <div className="grid md:grid-cols-2 gap-8 w-full">
         {posts.map((_, i) => (
           <div
@@ -26,7 +26,7 @@ export default function Featured() {
                 <p className="bg-zinc-200 rounded-sm px-2 py-1 ">React</p>
                 <p className="font-semibold">5 min read</p>
               </div>
-              <h2 className="font-semibold">
+              <h2 className="font-semibold text-xl">
                 Lorem ipsum dolor sit amet, adipisicing elit. Rerum, pariatur?
               </h2>
               <p className="text-base">
