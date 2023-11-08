@@ -7,8 +7,8 @@ export default function HomePage() {
     <main className="flex flex-col ">
       <Featured />
       <NewsLetter />
-      <PostGrid title="Latest" url="/posts/?sortBy=latest" />
-      <PostGrid title="Popular" url="/posts/?sortBy=popular" />
+      <PostGrid title="Latest" url="/search/?q=&sortBy=latest" />
+      <PostGrid title="Popular" url="/search/?q=&sortBy=popular" />
     </main>
   );
 }
