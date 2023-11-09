@@ -53,6 +53,15 @@ export default function Navbar() {
             </li>
             <li>
               <Link
+                onClick={() => setNavIsOpen(false)}
+                className="p-2 "
+                to={"/profile/great"}
+              >
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link
                 onClick={() => {
                   setNavIsOpen(false);
                   setModal({ isOpen: true, type: "login" });

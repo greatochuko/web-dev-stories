@@ -8,6 +8,12 @@ export default function Post() {
         <div className="flex items-center gap-2 text-base">
           <p className="bg-[#eee] rounded-sm px-2 py-1 ">React</p>
           <p className="font-semibold">5 min read</p>
+          <button className="px-2 py-1 ml-auto text-blue-500">
+            <i className="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button className="px-2 py-1 text-red-600">
+            <i className="fa-solid fa-trash-can"></i>
+          </button>
         </div>
 
         <h2 className="font-semibold">
