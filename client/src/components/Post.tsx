@@ -9,13 +9,7 @@ export default function Post() {
           <p className="bg-[#eee] rounded-sm px-2 py-1 ">React</p>
           <p className="font-semibold">5 min read</p>
         </div>
-        <Link to={"/creators"} className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-zinc-400"></div>
-          <div className="flex flex-col text-xs font-semibold">
-            <p>John Doe</p>
-            <p>11 Nov, 2023</p>
-          </div>
-        </Link>
+
         <h2 className="font-semibold">
           Lorem ipsum dolor sit amet, adipisicing elit. Rerum, pariatur?
         </h2>
