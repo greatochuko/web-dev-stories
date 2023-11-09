@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import BlogPostDetail from "./pages/BlogPostDetail";
 import Categories from "./pages/Categories";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
       { path: "/search", element: <SearchPage /> },
       { path: "/post/:postTitle", element: <BlogPostDetail /> },
       { path: "/categories", element: <Categories /> },
+      { path: "/profile/:userId", element: <Profile /> },
     ],
   },
 ]);
