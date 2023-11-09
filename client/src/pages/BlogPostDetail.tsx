@@ -8,7 +8,7 @@ export default function BlogPostDetail() {
   const { postTitle } = useParams();
 
   return (
-    <>
+    <main>
       <div className="flex-1 max-w-6xl w-[90%] mx-auto py-6">
         <p className="mb-4">Blog &gt; {postTitle}</p>
         <h1 className="text-2xl font-semibold">
@@ -25,6 +25,6 @@ export default function BlogPostDetail() {
         <ReactMarkdown>{postDetail}</ReactMarkdown>
       </div>
       <PostGrid grayBg={false} title="Read More" />
-    </>
+    </main>
   );
 }

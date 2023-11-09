@@ -21,6 +21,7 @@ export default function Navbar() {
         >
           <li>
             <Link
+              onClick={() => setNavIsOpen(false)}
               className={`p-2 ${pathname === "/" ? "font-semibold" : ""}`}
               to={"/"}
             >
@@ -29,6 +30,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
+              onClick={() => setNavIsOpen(false)}
               className={`p-2 ${
                 search.includes("sortBy=popular") ? "font-semibold" : ""
               }`}
@@ -38,12 +40,17 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link className="p-2 " to={"/categories"}>
+            <Link
+              onClick={() => setNavIsOpen(false)}
+              className="p-2 "
+              to={"/categories"}
+            >
               Categories
             </Link>
           </li>
           <li>
             <Link
+              onClick={() => setNavIsOpen(false)}
               to={"/register"}
               className="px-4 py-1 border rounded-md border-zinc-700"
             >
@@ -52,6 +59,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
+              onClick={() => setNavIsOpen(false)}
               to={"/register"}
               className="px-4 py-1 border rounded-md bg-zinc-700 text-zinc-100 border-zinc-700"
             >

@@ -3,6 +3,7 @@ import AppLayout from "./components/AppLayout";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import BlogPostDetail from "./pages/BlogPostDetail";
+import Categories from "./pages/Categories";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "/search", element: <SearchPage /> },
       { path: "/post/:postTitle", element: <BlogPostDetail /> },
+      { path: "/categories", element: <Categories /> },
     ],
   },
 ]);
