@@ -1,12 +1,12 @@
 import Post from "./Post";
 import { Link } from "react-router-dom";
 
-type PostGridProps = { title?: string; url?: string };
+type PostGridProps = { title?: string; url?: string; grayBg?: boolean };
 
 const posts = [1, 2, 3, 4];
-export default function PostGrid({ title, url }: PostGridProps) {
+export default function PostGrid({ title, url, grayBg = true }: PostGridProps) {
   return (
-    <section className="pb-10 bg-zinc-100 text-zinc-700">
+    <section className={`pb-10 ${grayBg ? "bg-zinc-100" : ""} text-zinc-700`}>
       {title && (
         <h1 className="mb-4 font-semibold text-2xl max-w-7xl sm:w-[90%] mx-auto px-4 pt-4 flex justify-between">
           {title}

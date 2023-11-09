@@ -5,8 +5,8 @@ const posts = [1, 2, 3];
 export default function Featured() {
   return (
     <section className="p-4 w-full  text-zinc-700 max-w-7xl sm:w-[90%] mx-auto mb-8">
-      <h1 className="mb-4 font-bold text-2xl">Featured Blog Posts</h1>
-      <div className="grid md:grid-cols-2 gap-8 w-full">
+      <h1 className="mb-4 text-2xl font-bold">Featured Blog Posts</h1>
+      <div className="grid w-full gap-8 md:grid-cols-2">
         {posts.map((_, i) => (
           <div
             key={i}
@@ -22,11 +22,11 @@ export default function Featured() {
               }`}
             ></div>
             <div className="flex flex-col gap-2 mt-1">
-              <div className="flex gap-2 items-center text-base">
-                <p className="bg-zinc-200 rounded-sm px-2 py-1 ">React</p>
+              <div className="flex items-center gap-2 text-base">
+                <p className="px-2 py-1 rounded-sm bg-zinc-200 ">React</p>
                 <p className="font-semibold">5 min read</p>
               </div>
-              <h2 className="font-semibold text-xl">
+              <h2 className="text-xl font-semibold">
                 Lorem ipsum dolor sit amet, adipisicing elit. Rerum, pariatur?
               </h2>
               <p className="text-base">
@@ -35,7 +35,7 @@ export default function Featured() {
               </p>
               <Link
                 className="text-base w-fit text-zinc-900 hover:underline"
-                to={"/"}
+                to={"/post/lorem"}
               >
                 Read More &gt;
               </Link>
