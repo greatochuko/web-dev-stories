@@ -1,21 +1,26 @@
 import bcrypt from "bcryptjs";
 import { User } from "../models/user.js";
+import { generateJwt } from "../utils/authUtils.js";
 
 export function login(req, res) {
-  res.json("login");
+  try {
+    res.json("login");
+  } catch (err) {
+    res.json({ error: err.message });
+  }
 }
 
 export async function register(req, res) {
   try {
     const { fullName, email, password } = req.body;
-    console.log(fullName, email, password);
     const encryptedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       fullName,
       email,
       password: encryptedPassword,
     });
-    res.json(newUser);
+    const token = generateJwt(newUser.id);
+    res.json({ token });
   } catch (err) {
     res.json({ error: err.message });
   }
