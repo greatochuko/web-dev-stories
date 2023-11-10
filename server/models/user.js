@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   bio: { type: String, default: "" },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  posts: { type: [mongoose.SchemaTypes.ObjectId], default: [] },
+  posts: { type: [mongoose.SchemaTypes.ObjectId], default: [], ref: "post" },
 });
 
 export const User = new mongoose.model("user", userSchema);
