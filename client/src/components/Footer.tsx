@@ -19,7 +19,7 @@ export default function Footer() {
           <ul className="flex flex-col gap-4 md:flex-row">
             <li>
               <a
-                href="http://linkedin.com/in/greatochuko123"
+                href="http://linkedin.com/in/greatochuko"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -29,7 +29,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="http://linkedin.com/in/greatochuko123"
+                href="http://twitter.com/greatochuko123"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -39,7 +39,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="http://linkedin.com/in/greatochuko123"
+                href="http://github.com/greatochuko123"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -49,7 +49,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="http://linkedin.com/in/greatochuko123"
+                href="http://greatochuko.onrender.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
