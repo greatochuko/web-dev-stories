@@ -22,3 +22,18 @@ export async function createPost(req, res) {
     res.status(400).json({ error: err.message });
   }
 }
+
+export async function getPost(req, res) {
+  try {
+    const post = await Post.findById(req.params.postId);
+    if (!post)
+      throw new Error(`Post with id ${req.params.postId} does not exist`);
+    res.json(post);
+  } catch (err) {
+    if (err.name === "CastError" && err.kind === "ObjectId")
+      return res
+        .status(404)
+        .json({ error: `Post with id ${req.params.postId} does not exist` });
+    res.status(400).json({ error: err });
+  }
+}
