@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
-  bio: { type: String, required: true },
+  bio: { type: String, default: "" },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   posts: { type: [mongoose.SchemaTypes.ObjectId], default: [] },
