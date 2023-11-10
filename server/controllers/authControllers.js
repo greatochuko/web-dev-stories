@@ -2,9 +2,16 @@ import bcrypt from "bcryptjs";
 import { User } from "../models/user.js";
 import { generateJwt } from "../utils/authUtils.js";
 
-export function login(req, res) {
+export async function login(req, res) {
+  const { email, password } = req.body;
   try {
-    res.json("login");
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("Invalid Email and password combination");
+    const passwordIsCorrect = await bcrypt.compare(password, user.password);
+    if (!passwordIsCorrect)
+      throw new Error("Invalid Email and password combination");
+    const token = generateJwt(user.id);
+    res.json({ token });
   } catch (err) {
     res.json({ error: err.message });
   }
