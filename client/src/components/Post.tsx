@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
+import { User } from "../context/userContext";
 
-export default function Post() {
+export type Post = {
+  _id: string;
+  title: string;
+  content: string;
+  category: string;
+  author: User;
+  reads: number;
+  comments: [];
+};
+
+export default function Post({ post }: { post: Post }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="w-full aspect-[1.5] bg-zinc-400"></div>
@@ -16,18 +27,18 @@ export default function Post() {
           </button>
         </div>
 
-        <h2 className="font-semibold">
-          Lorem ipsum dolor sit amet, adipisicing elit. Rerum, pariatur?
-        </h2>
-        <p className="text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elitt...
-        </p>
-        <Link
-          className="text-sm text-blue-600 w-fit hover:underline"
-          to={"/post/lorem"}
-        >
-          Read More &gt;
+        <Link to={`/post/${post._id}`} className="font-semibold">
+          {post.title}
         </Link>
+        <p className="text-base">
+          {post.content.split(" ").slice(0, 7).join(" ")}...
+          <Link
+            className="text-sm text-blue-600 w-fit hover:underline ml-2"
+            to={`/post/${post._id}`}
+          >
+            Read More &gt;
+          </Link>
+        </p>
       </div>
     </div>
   );

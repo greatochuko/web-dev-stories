@@ -67,17 +67,16 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link
+                  <button
                     onClick={() => {
                       setNavIsOpen(false);
                       setModal({ isOpen: true, type: "logout" });
                     }}
-                    to={""}
                     className="px-2 py-1 border rounded-md bg-red-600 text-zinc-100 border-red-600"
                   >
                     <i className="fa-solid fa-right-from-bracket mr-2"></i>
                     Logout
-                  </Link>
+                  </button>
                 </li>
               </>
             ) : (

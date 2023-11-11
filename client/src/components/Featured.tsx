@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
-
-const posts = [1, 2, 3];
+import { useState, useEffect } from "react";
+import { fetchPosts } from "../services/postServices";
 
 export default function Featured() {
+  const [posts, setPost] = useState([]);
+
+  useEffect(() => {
+    async function getPosts() {
+      const data = await fetchPosts();
+      setPost(data);
+    }
+    getPosts();
+  }, []);
   return (
     <section className="p-4 w-full  text-zinc-700 max-w-7xl sm:w-[90%] mx-auto mb-8">
       <h1 className="mb-4 text-2xl font-bold">Featured Blog Posts</h1>

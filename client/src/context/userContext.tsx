@@ -1,14 +1,6 @@
 import { createContext, useState } from "react";
 import { fetchUser } from "../services/userServices";
-type Post = {
-  _id: string;
-  title: string;
-  content: string;
-  category: string;
-  author: User;
-  reads: number;
-  comments: [];
-};
+import { Post } from "../components/Post";
 
 export type User = {
   _id: string;

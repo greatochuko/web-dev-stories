@@ -1,10 +1,20 @@
 import Post from "./Post";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { fetchPosts } from "../services/postServices";
 
 type PostGridProps = { title?: string; url?: string; grayBg?: boolean };
 
-const posts = [1, 2, 3, 4];
 export default function PostGrid({ title, url, grayBg = true }: PostGridProps) {
+  const [posts, setPost] = useState([]);
+
+  useEffect(() => {
+    async function getPosts() {
+      const data = await fetchPosts();
+      setPost(data);
+    }
+    getPosts();
+  }, []);
   return (
     <section className={`pb-10 ${grayBg ? "bg-zinc-100" : ""} text-zinc-700`}>
       {title && (
@@ -20,9 +30,9 @@ export default function PostGrid({ title, url, grayBg = true }: PostGridProps) {
           )}
         </h1>
       )}
-      <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-4  max-w-7xl sm:w-[90%] mx-auto p-4">
-        {posts.map((_, i) => (
-          <Post key={i} />
+      <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  max-w-7xl sm:w-[90%] mx-auto p-4">
+        {posts.map((post, i) => (
+          <Post post={post} key={i} />
         ))}
       </div>
     </section>

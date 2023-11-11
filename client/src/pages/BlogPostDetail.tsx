@@ -28,7 +28,7 @@ export default function BlogPostDetail() {
               <p>11 Nov, 2023</p>
             </div>
           </Link>
-          <div className="w-full aspect-[1.5] md:aspect-video bg-zinc-400"></div>
+          <div className="w-full aspect-[1.5] md:aspect-[2] bg-zinc-400"></div>
           <ReactMarkdown>{postDetail}</ReactMarkdown>
         </div>
       </main>
