@@ -1,12 +1,28 @@
 import { useSearchParams } from "react-router-dom";
 import PostGrid from "../components/PostGrid";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { searchPosts } from "../services/postServices";
+import { Post } from "../components/Post";
 
 export default function SearchPage() {
   const [params, setParams] = useSearchParams();
   const query = params.get("q");
   const [sortBy, setSortBy] = useState(params.get("sortBy") || "");
   const [category, setCategory] = useState(params.get("category") || "");
+
+  const [posts, setPost] = useState<Post[] | null>(null);
+  const [loading, setLoading] = useState(false);
+  console.log(loading);
+
+  useEffect(() => {
+    async function getSearchedPosts() {
+      setLoading(true);
+      const data = await searchPosts(query as string);
+      setPost(data);
+      setLoading(false);
+    }
+    getSearchedPosts();
+  }, [query]);
 
   function handleChangeSort(e: React.ChangeEvent<HTMLSelectElement>) {
     setSortBy(e.target.value);
@@ -47,13 +63,22 @@ export default function SearchPage() {
               onChange={handleChangeCategory}
               className="p-1 border rounded-sm outline-none border-zinc-300"
             >
+              <option value="all">All</option>
               <option value="javascript">Javascript</option>
               <option value="react">React</option>
             </select>
           </div>
         </div>
       </div>
-      <PostGrid />
+      {loading ? (
+        <div className=" py-4 mb-10 text-center">Loading...</div>
+      ) : posts?.length ? (
+        <PostGrid posts={posts} />
+      ) : (
+        <div className="w-full py-4 mb-10 flex justify-center">
+          No post match the query '{query}'
+        </div>
+      )}
     </div>
   );
 }

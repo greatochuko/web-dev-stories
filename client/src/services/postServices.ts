@@ -23,3 +23,15 @@ export async function fetchPost(postId: string) {
     return { error: err.message };
   }
 }
+
+export async function searchPosts(query: string) {
+  try {
+    const res = await fetch(`${BASE_URL}/search/?q=${query}`);
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    const err = e as Error;
+
+    return { error: err.message };
+  }
+}

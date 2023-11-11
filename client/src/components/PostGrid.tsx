@@ -1,20 +1,19 @@
-import Post from "./Post";
+import Post, { Post as PostType } from "./Post";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { fetchPosts } from "../services/postServices";
 
-type PostGridProps = { title?: string; url?: string; grayBg?: boolean };
+type PostGridProps = {
+  title?: string;
+  url?: string;
+  grayBg?: boolean;
+  posts: PostType[];
+};
 
-export default function PostGrid({ title, url, grayBg = true }: PostGridProps) {
-  const [posts, setPost] = useState([]);
-
-  useEffect(() => {
-    async function getPosts() {
-      const data = await fetchPosts();
-      setPost(data);
-    }
-    getPosts();
-  }, []);
+export default function PostGrid({
+  posts,
+  title,
+  url,
+  grayBg = true,
+}: PostGridProps) {
   return (
     <section className={`pb-10 ${grayBg ? "bg-zinc-100" : ""} text-zinc-700`}>
       {title && (

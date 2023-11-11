@@ -82,28 +82,26 @@ export default function Navbar() {
             ) : (
               <>
                 <li>
-                  <Link
+                  <button
                     onClick={() => {
                       setNavIsOpen(false);
                       setModal({ isOpen: true, type: "login" });
                     }}
-                    to={""}
                     className="px-4 py-1 border rounded-md border-zinc-700"
                   >
                     Login
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link
+                  <button
                     onClick={() => {
                       setNavIsOpen(false);
                       setModal({ isOpen: true, type: "register" });
                     }}
-                    to={""}
                     className="px-4 py-1 border rounded-md bg-zinc-700 text-zinc-100 border-zinc-700"
                   >
                     Register
-                  </Link>
+                  </button>
                 </li>
               </>
             )}
