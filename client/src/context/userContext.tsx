@@ -19,7 +19,7 @@ export const UserContext = createContext<UserProviderValue | null>(null);
 
 const fetchedUser = await fetchUser();
 
-const initialUser = fetchedUser;
+const initialUser = fetchedUser.error ? null : fetchedUser;
 
 export default function UserProvider({
   children,

@@ -27,7 +27,10 @@ export async function createPost(req, res) {
 
 export async function getPost(req, res) {
   try {
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.postId).populate({
+      path: "author",
+      select: "fullName",
+    });
     res.json(post);
   } catch (err) {
     if (err.name === "CastError" && err.kind === "ObjectId")

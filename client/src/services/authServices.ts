@@ -8,12 +8,9 @@ export async function login(email: string, password: string) {
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
-    console.log(data);
     localStorage.setItem("token", data.token);
     return data;
   } catch (err) {
-    console.log(err);
-
     return err;
   }
 }
@@ -34,8 +31,6 @@ export async function register(
     localStorage.setItem("token", data.token);
     return data;
   } catch (err) {
-    console.log(err);
-
     return err;
   }
 }

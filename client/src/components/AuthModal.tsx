@@ -56,7 +56,6 @@ export default function AuthModal({
       return;
     }
     const user = await fetchUser();
-    console.log(user);
 
     setUser(user);
     closeModal();

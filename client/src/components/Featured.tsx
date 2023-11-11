@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchPosts } from "../services/postServices";
+import { Post } from "./Post";
 
 export default function Featured() {
-  const [posts, setPost] = useState([]);
+  const [posts, setPost] = useState<Post[]>([]);
 
   useEffect(() => {
     async function getPosts() {
@@ -16,7 +17,7 @@ export default function Featured() {
     <section className="p-4 w-full  text-zinc-700 max-w-7xl sm:w-[90%] mx-auto mb-8">
       <h1 className="mb-4 text-2xl font-bold">Featured Blog Posts</h1>
       <div className="grid w-full gap-8 md:grid-cols-2">
-        {posts.map((_, i) => (
+        {posts.map((post, i) => (
           <div
             key={i}
             className={`flex flex-col gap-2 ${
@@ -44,7 +45,7 @@ export default function Featured() {
               </p>
               <Link
                 className="text-base w-fit text-zinc-900 hover:underline"
-                to={"/post/lorem"}
+                to={`/post/${post._id}`}
               >
                 Read More &gt;
               </Link>
