@@ -1,10 +1,21 @@
 import { createContext, useState } from "react";
 import { fetchUser } from "../services/userServices";
-type User = {
+type Post = {
+  _id: string;
+  title: string;
+  content: string;
+  category: string;
+  author: User;
+  reads: number;
+  comments: [];
+};
+
+export type User = {
+  _id: string;
   fullName: string;
   bio: string;
   email: string;
-  posts: string[];
+  posts: Post[];
 };
 
 export type UserProviderValue = {
@@ -16,7 +27,7 @@ export const UserContext = createContext<UserProviderValue | null>(null);
 
 const fetchedUser = await fetchUser();
 
-const initialUser = fetchedUser.error ? null : fetchedUser;
+const initialUser = fetchedUser;
 
 export default function UserProvider({
   children,

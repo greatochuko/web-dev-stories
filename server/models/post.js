@@ -10,6 +10,8 @@ const postSchema = new mongoose.Schema(
       required: true,
       ref: "user",
     },
+    reads: { type: Number, default: 0 },
+    comments: { type: [mongoose.SchemaTypes.ObjectId], default: [] },
   },
   { timestamps: true }
 );

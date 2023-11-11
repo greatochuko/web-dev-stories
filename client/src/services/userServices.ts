@@ -6,7 +6,18 @@ export async function fetchUser() {
     const res = await fetch(`${BASE_URL}/user`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    const data = res.json();
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function fetchUserProfile(userId: string) {
+  try {
+    const res = await fetch(`${BASE_URL}/user/profile/${userId}`);
+    const data = await res.json();
     return data;
   } catch (error) {
     return error;

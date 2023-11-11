@@ -61,7 +61,7 @@ export default function Navbar() {
                   <Link
                     onClick={() => setNavIsOpen(false)}
                     className="p-2 "
-                    to={"/profile/great"}
+                    to={`/profile/${user._id}`}
                   >
                     Profile
                   </Link>

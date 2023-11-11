@@ -5,7 +5,7 @@ import NewsLetterForm from "./NewsLetterForm";
 export default function Footer() {
   return (
     <footer className="text-white bg-zinc-900 ">
-      <div className="max-w-7xl w-[90%] mx-auto p-4 md:p-6 flex flex-col md:flex-row justify-between gap-4 border-b">
+      <div className="max-w-7xl w-[90%] mx-auto p-4 md:p-6 flex flex-col lg:flex-row justify-between gap-4 border-b">
         <div className="flex gap-2">
           <img src="/favicon.png" alt="logo" className="h-12 invert" />
           <img src="/logo.png" alt="logo" className="h-12 invert" />
