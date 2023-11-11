@@ -3,6 +3,7 @@ import PostGrid from "../components/PostGrid";
 import React, { useState, useEffect } from "react";
 import { searchPosts } from "../services/postServices";
 import { Post } from "../components/Post";
+import PostWireFrame from "../components/PostWireFrame";
 
 export default function SearchPage() {
   const [params, setParams] = useSearchParams();
@@ -71,7 +72,11 @@ export default function SearchPage() {
         </div>
       </div>
       {loading ? (
-        <div className=" py-4 mb-10 text-center">Loading...</div>
+        <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  max-w-7xl sm:w-[90%] mx-auto p-4">
+          <PostWireFrame />
+          <PostWireFrame />
+          <PostWireFrame />
+        </div>
       ) : posts?.length ? (
         <PostGrid posts={posts} />
       ) : (
