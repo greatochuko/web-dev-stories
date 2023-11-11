@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import SearchForm from "./SearchForm";
 import AuthModal from "./AuthModal";
 import useUserContext from "../hooks/useUserContext";
+import ModalContainer from "./ModalContainer";
+import LogoutModal from "./LogoutModal";
 
 export default function Navbar() {
   const [navIsOpen, setNavIsOpen] = useState(false);
@@ -68,7 +70,7 @@ export default function Navbar() {
                   <Link
                     onClick={() => {
                       setNavIsOpen(false);
-                      setModal({ isOpen: true, type: "register" });
+                      setModal({ isOpen: true, type: "logout" });
                     }}
                     to={""}
                     className="px-2 py-1 border rounded-md bg-red-600 text-zinc-100 border-red-600"
@@ -120,13 +122,23 @@ export default function Navbar() {
         </nav>
       </header>
       {modal.isOpen && (
-        <AuthModal
-          type={modal.type}
-          setType={(type: string) =>
-            setModal((curr) => ({ ...curr, type: type }))
-          }
+        <ModalContainer
           closeModal={() => setModal({ isOpen: false, type: "" })}
-        />
+        >
+          {modal.type === "logout" ? (
+            <LogoutModal
+              closeModal={() => setModal({ isOpen: false, type: "" })}
+            />
+          ) : (
+            <AuthModal
+              type={modal.type}
+              setType={(type: string) =>
+                setModal((curr) => ({ ...curr, type: type }))
+              }
+              closeModal={() => setModal({ isOpen: false, type: "" })}
+            />
+          )}
+        </ModalContainer>
       )}
     </>
   );

@@ -18,8 +18,6 @@ const fetchedUser = await fetchUser();
 
 const initialUser = fetchedUser.error ? null : fetchedUser;
 
-console.log(initialUser);
-
 export default function UserProvider({
   children,
 }: {
