@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import postRouter from "./routes/postRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import searchRouter from "./routes/searchRoutes.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/user", userRouter);
+app.use("/api/search", searchRouter);
 
 async function connectToServer() {
   try {
