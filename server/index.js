@@ -18,6 +18,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/user", userRouter);
 app.use("/api/search", searchRouter);
+app.use("/api/comments", commentRouter);
 
 async function connectToServer() {
   try {
