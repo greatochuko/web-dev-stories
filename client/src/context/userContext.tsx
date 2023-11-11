@@ -7,7 +7,7 @@ type User = {
   posts: string[];
 };
 
-type UserProviderValue = {
+export type UserProviderValue = {
   user: User;
   setUser: React.Dispatch<User | null>;
 };

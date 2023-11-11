@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { login } from "../services/authServices";
+import { fetchUser } from "../services/userServices";
+import useUserContext from "../hooks/useUserContext";
 
 type AuthModalProps = {
   closeModal: () => void;
@@ -11,6 +14,7 @@ export default function AuthModal({
   setType,
   type,
 }: AuthModalProps) {
+  const { setUser } = useUserContext();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [form, setForm] = useState({
@@ -19,6 +23,8 @@ export default function AuthModal({
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const cannotLogin = !form.email || !form.password;
   const cannotRegister =
@@ -36,7 +42,23 @@ export default function AuthModal({
     setShowConfirmPassword((curr) => !curr);
   }
 
-  function handleLogin() {
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    const data: { token?: string; error?: string } = await login(
+      form.email,
+      form.password
+    );
+    if (data.error) {
+      setLoading(false);
+      setError(data.error);
+      return;
+    }
+    const user = await fetchUser();
+    console.log(user);
+
+    setUser(user);
     closeModal();
   }
 
@@ -64,6 +86,7 @@ export default function AuthModal({
       >
         <img src="/favicon.png" alt="" className="h-20" />
         <button
+          type="button"
           onClick={closeModal}
           className="absolute top-0 right-0 p-2 pt-1 duration-200 text-zinc-500 hover:text-zinc-900"
         >
@@ -152,12 +175,13 @@ export default function AuthModal({
               </button>
             </div>
           )}
+          <div className="text-red-500 text-sm">{error}</div>
           <button
             type="submit"
             className="p-2 text-white rounded-md bg-zinc-900 disabled:bg-zinc-400 disabled:cursor-not-allowed"
             disabled={type === "login" ? cannotLogin : cannotRegister}
           >
-            {type === "login" ? "Login" : "Register"}
+            {loading ? "Loading" : type === "login" ? "Login" : "Register"}
           </button>
         </div>
       </form>

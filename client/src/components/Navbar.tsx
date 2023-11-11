@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SearchForm from "./SearchForm";
 import AuthModal from "./AuthModal";
+import useUserContext from "../hooks/useUserContext";
 
 export default function Navbar() {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [modal, setModal] = useState({ isOpen: false, type: "" });
   const { pathname, search } = useLocation();
+  const { user } = useUserContext();
 
   return (
     <>
@@ -51,39 +53,59 @@ export default function Navbar() {
                 Categories
               </Link>
             </li>
-            <li>
-              <Link
-                onClick={() => setNavIsOpen(false)}
-                className="p-2 "
-                to={"/profile/great"}
-              >
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                onClick={() => {
-                  setNavIsOpen(false);
-                  setModal({ isOpen: true, type: "login" });
-                }}
-                to={""}
-                className="px-4 py-1 border rounded-md border-zinc-700"
-              >
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link
-                onClick={() => {
-                  setNavIsOpen(false);
-                  setModal({ isOpen: true, type: "register" });
-                }}
-                to={""}
-                className="px-4 py-1 border rounded-md bg-zinc-700 text-zinc-100 border-zinc-700"
-              >
-                Register
-              </Link>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <Link
+                    onClick={() => setNavIsOpen(false)}
+                    className="p-2 "
+                    to={"/profile/great"}
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    onClick={() => {
+                      setNavIsOpen(false);
+                      setModal({ isOpen: true, type: "register" });
+                    }}
+                    to={""}
+                    className="px-2 py-1 border rounded-md bg-red-600 text-zinc-100 border-red-600"
+                  >
+                    <i className="fa-solid fa-right-from-bracket mr-2"></i>
+                    Logout
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    onClick={() => {
+                      setNavIsOpen(false);
+                      setModal({ isOpen: true, type: "login" });
+                    }}
+                    to={""}
+                    className="px-4 py-1 border rounded-md border-zinc-700"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    onClick={() => {
+                      setNavIsOpen(false);
+                      setModal({ isOpen: true, type: "register" });
+                    }}
+                    to={""}
+                    className="px-4 py-1 border rounded-md bg-zinc-700 text-zinc-100 border-zinc-700"
+                  >
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
           <button
             className="p-2 text-lg lg:hidden"
