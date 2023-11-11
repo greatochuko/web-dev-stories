@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { login } from "../services/authServices";
+import { login, register } from "../services/authServices";
 import { fetchUser } from "../services/userServices";
 import useUserContext from "../hooks/useUserContext";
 
@@ -62,7 +62,23 @@ export default function AuthModal({
     closeModal();
   }
 
-  function handleSignup() {
+  async function handleSignup(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    const data: { token?: string; error?: string } = await register(
+      form.fullName,
+      form.email,
+      form.password
+    );
+    if (data.error) {
+      setLoading(false);
+      setError(data.error);
+      return;
+    }
+    const user = await fetchUser();
+
+    setUser(user);
     closeModal();
   }
 
