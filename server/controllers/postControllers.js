@@ -50,3 +50,16 @@ export async function editPost(req, res) {
     res.status(400).json({ error: err });
   }
 }
+
+export async function deletePost(req, res) {
+  try {
+    const post = await Post.findByIdAndDelete(req.params.postId);
+    res.json(post);
+  } catch (err) {
+    if (err.name === "CastError" && err.kind === "ObjectId")
+      return res
+        .status(404)
+        .json({ error: `Post with id ${req.params.postId} does not exist` });
+    res.status(400).json({ error: err });
+  }
+}
