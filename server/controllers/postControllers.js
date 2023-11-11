@@ -1,4 +1,5 @@
 import { Post } from "../models/post.js";
+import { User } from "../models/user.js";
 
 export async function getPosts(req, res) {
   const posts = await Post.find().populate({
@@ -10,11 +11,12 @@ export async function getPosts(req, res) {
 
 export async function createPost(req, res) {
   const { title, content, category } = req.body;
+  const author = await User.findById(req.userId);
   try {
     const newPost = await Post.create({
       title,
       content,
-      author: req.user.id,
+      author,
       category,
     });
     res.json(newPost);
