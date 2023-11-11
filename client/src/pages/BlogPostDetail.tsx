@@ -1,11 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import PostGrid from "../components/PostGrid";
 import Comment from "../components/Comment";
 
 import { useState, useEffect } from "react";
 import { Post } from "../components/Post";
 import { fetchPost } from "../services/postServices";
+import SimilarPosts from "../components/SimilarPosts";
 
 const comments = [
   { name: "asdf", children: [{ name: "asd", children: [] }] },
@@ -59,7 +59,7 @@ export default function BlogPostDetail() {
           ))}
         </div>
       </div>
-      <PostGrid grayBg={false} title="Read More" />
+      <SimilarPosts />
     </>
   );
 }

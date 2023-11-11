@@ -6,11 +6,14 @@ import { fetchPosts } from "../services/postServices";
 
 export default function HomePage() {
   const [posts, setPost] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getPosts() {
+      setLoading(true);
       const data = await fetchPosts();
       setPost(data);
+      setLoading(false);
     }
     getPosts();
   }, []);
@@ -19,9 +22,15 @@ export default function HomePage() {
     <main className="flex flex-col ">
       <Featured />
       <NewsLetter />
-      <PostGrid posts={posts} title="Latest" url="/search/?q=&sortBy=latest" />
       <PostGrid
         posts={posts}
+        loading={loading}
+        title="Latest"
+        url="/search/?q=&sortBy=latest"
+      />
+      <PostGrid
+        posts={posts}
+        loading={loading}
         title="Popular"
         url="/search/?q=&sortBy=popular"
       />
