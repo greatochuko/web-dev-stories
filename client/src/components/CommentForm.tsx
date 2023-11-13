@@ -1,22 +1,30 @@
 import { postComment } from "../services/commentServices";
 import { useState } from "react";
 import { CommentType } from "./Comment";
+import useUserContext from "../hooks/useUserContext";
+import { useParams } from "react-router-dom";
 
 type CommentFormProps = {
-  postId: string;
   setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
 };
 
-export default function CommentForm({ postId, setComments }: CommentFormProps) {
+export default function CommentForm({ setComments }: CommentFormProps) {
   const [message, setmessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { user } = useUserContext();
+  const { postId } = useParams<string>();
 
   async function handleCreateComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    const data = await postComment(message, postId);
+    const data = await postComment(message, postId as string);
 
-    if (data.error) return setLoading(false);
+    if (data.error) {
+      setLoading(false);
+      setmessage("");
+      return;
+    }
+    setmessage("");
     setComments(data);
     setLoading(false);
   }
@@ -24,19 +32,21 @@ export default function CommentForm({ postId, setComments }: CommentFormProps) {
   return (
     <form
       onSubmit={handleCreateComment}
-      className="flex flex-col items-end flex-1 gap-2 md:gap-4"
+      className="flex flex-col focus-within:shadow-lg flex-1 gap-2 md:gap-4 border-zinc-400 border rounded-md p-2 md:p-4"
     >
-      <div className="w-full flex gap-4 items-start">
-        <div className="w-[3.5rem] rounded-full aspect-square bg-zinc-300"></div>
-        <textarea
-          value={message}
-          onChange={(e) => setmessage(e.target.value)}
-          className="w-full h-24 p-2 border-2 rounded-md outline-none sm:h-32 border-zinc-600"
-        ></textarea>
+      <div className="flex gap-2 font-semibold items-center">
+        <div className="w-10 rounded-full aspect-square bg-zinc-300 "></div>
+        <h2>{user.fullName}</h2>
       </div>
+      <textarea
+        value={message}
+        onChange={(e) => setmessage(e.target.value)}
+        placeholder="Comment"
+        className="w-full h-24 p-2 border-b outline-none sm:h-32 resize-none border-zinc-300"
+      ></textarea>
       <button
         disabled={loading}
-        className="px-4 py-2 text-white rounded-md bg-zinc-900"
+        className="px-4 py-2 ml-auto text-white rounded-md bg-zinc-800 hover:bg-zinc-900 duration-200 disabled:bg-zinc-500"
       >
         {loading ? "Loading" : "Comment"}
       </button>

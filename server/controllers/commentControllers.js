@@ -20,7 +20,6 @@ export async function postComment(req, res) {
     const comments = await Comment.find({ post: postId });
     res.json(comments);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ error: err.message });
   }
 }

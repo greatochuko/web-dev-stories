@@ -5,7 +5,6 @@ import { fetchPost } from "../services/postServices";
 import SimilarPosts from "../components/SimilarPosts";
 import CommentSection from "../components/CommentSection";
 import { CommentType } from "../components/Comment";
-import CommentForm from "../components/CommentForm";
 import { useEffect, useState } from "react";
 import PostDetails from "../components/PostDetails";
 import { fetchComments } from "../services/commentServices";
@@ -37,14 +36,13 @@ export default function BlogPostDetail() {
 
   if (post)
     return (
-      <>
-        <main className="w-full max-w-5xl p-6 mx-auto">
-          <PostDetails post={post} />
-          <CommentForm setComments={setComments} postId={postId as string} />
-
-          <CommentSection comments={comments as CommentType[]} />
-          <SimilarPosts />
-        </main>
-      </>
+      <main className="w-full flex flex-col gap-8 max-w-5xl p-6 mx-auto">
+        <PostDetails post={post} />
+        <CommentSection
+          setComments={setComments}
+          comments={comments as CommentType[]}
+        />
+        <SimilarPosts />
+      </main>
     );
 }
