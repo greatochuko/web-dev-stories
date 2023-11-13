@@ -3,21 +3,25 @@ import { useParams } from "react-router-dom";
 import { Post } from "../components/Post";
 import { fetchPost } from "../services/postServices";
 import SimilarPosts from "../components/SimilarPosts";
-import CommentSection, { CommentType } from "../components/CommentSection";
+import CommentSection from "../components/CommentSection";
+import { CommentType } from "../components/Comment";
 import CommentForm from "../components/CommentForm";
 import { useEffect, useState } from "react";
 import PostDetails from "../components/PostDetails";
+import { fetchComments } from "../services/commentServices";
 
 export default function BlogPostDetail() {
   const { postId } = useParams<string>();
   const [post, setPost] = useState<Post | null>(null);
+  const [comments, setComments] = useState<CommentType[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const comments = post?.comments as CommentType[];
 
   useEffect(() => {
     async function getPost() {
       setLoading(true);
       const postData = await fetchPost(postId as string);
+      const commentsData = await fetchComments(postId as string);
+      setComments(commentsData);
       setPost(postData);
       setLoading(false);
     }
@@ -36,9 +40,9 @@ export default function BlogPostDetail() {
       <>
         <main className="w-full max-w-5xl p-6 mx-auto">
           <PostDetails post={post} />
-          <CommentForm setPost={setPost} postId={postId as string} />
+          <CommentForm setComments={setComments} postId={postId as string} />
 
-          <CommentSection comments={comments} />
+          <CommentSection comments={comments as CommentType[]} />
           <SimilarPosts />
         </main>
       </>

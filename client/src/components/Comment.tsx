@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Comment as CommentType } from "./CommentSection";
+import { getDuration } from "../utils/getDuration";
+
+export type CommentType = {
+  _id: string;
+  message: string;
+  children: CommentType[];
+  createdAt: string;
+};
 
 export type CommentProps = {
   comment: CommentType;
@@ -14,13 +21,10 @@ export default function Comment({ comment }: CommentProps) {
         <h4 className="text-lg font-semibold">
           Great Ochuko -{" "}
           <span className="text-base font-normal text-zinc-600">
-            20 hours ago
+            {getDuration(comment.createdAt)}
           </span>
         </h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint impedit
-          deserunt sequi fuga quidem fugit ipsam harum pariatur voluptas nisi!
-        </p>
+        <p>{comment.message}</p>
         <div className="flex gap-3 text-lg text-zinc-800">
           <button>
             <i className="fa-regular fa-thumbs-down"></i>

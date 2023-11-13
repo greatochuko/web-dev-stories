@@ -1,28 +1,24 @@
 import { postComment } from "../services/commentServices";
 import { useState } from "react";
-import { fetchPost } from "../services/postServices";
-import { Post } from "./Post";
+import { CommentType } from "./Comment";
 
 type CommentFormProps = {
   postId: string;
-  setPost: React.Dispatch<React.SetStateAction<Post | null>>;
+  setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
 };
 
-export default function CommentForm({ postId, setPost }: CommentFormProps) {
+export default function CommentForm({ postId, setComments }: CommentFormProps) {
   const [message, setmessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleCreateComment() {
+  async function handleCreateComment(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setLoading(true);
-    try {
-      await postComment(message, postId);
-      const data = await fetchPost(postId);
-      setPost(data);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
+    const data = await postComment(message, postId);
+
+    if (data.error) return setLoading(false);
+    setComments(data);
+    setLoading(false);
   }
 
   return (
@@ -42,7 +38,7 @@ export default function CommentForm({ postId, setPost }: CommentFormProps) {
         disabled={loading}
         className="px-4 py-2 text-white rounded-md bg-zinc-900"
       >
-        Comment
+        {loading ? "Loading" : "Comment"}
       </button>
     </form>
   );

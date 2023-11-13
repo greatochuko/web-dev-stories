@@ -22,6 +22,7 @@ export async function postComment(message: string, postId: string) {
     return data;
   } catch (e) {
     const err = e as Error;
+
     return { error: err };
   }
 }
