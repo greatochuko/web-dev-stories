@@ -8,7 +8,7 @@ import PostWireFrame from "../components/PostWireFrame";
 export default function SearchPage() {
   const [params, setParams] = useSearchParams();
   const query = params.get("q");
-  const [sortBy, setSortBy] = useState(params.get("sortBy") || "");
+  const [sortBy, setSortBy] = useState(params.get("sortBy") || "latest");
   const [category, setCategory] = useState(params.get("category") || "all");
 
   const [posts, setPost] = useState<Post[] | null>(null);
@@ -16,9 +16,20 @@ export default function SearchPage() {
   let filteredPosts: Post[] | null | undefined;
 
   if (category === "all") {
-    filteredPosts = posts;
+    filteredPosts = posts?.map((a) => a);
   } else {
     filteredPosts = posts?.filter((post) => post.category === category);
+  }
+
+  if (sortBy === "latest") {
+    filteredPosts = filteredPosts?.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  } else if (sortBy === "popular") {
+    filteredPosts = filteredPosts?.sort(
+      (a, b) => b.comments.length - a.comments.length
+    );
   }
 
   useEffect(() => {
