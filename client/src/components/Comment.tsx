@@ -2,19 +2,24 @@ import { useState } from "react";
 import { getDuration } from "../utils/getDuration";
 import useUserContext from "../hooks/useUserContext";
 
+import CommentReplyForm from "./CommentReplyForm";
+
 export type CommentType = {
   _id: string;
   message: string;
   children: CommentType[];
+  parent: string;
   createdAt: string;
 };
 
 export type CommentProps = {
   comment: CommentType;
+  setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
 };
 
-export default function Comment({ comment }: CommentProps) {
+export default function Comment({ comment, setComments }: CommentProps) {
   const [showReplyForm, setShowReplyForm] = useState(false);
+
   const { user } = useUserContext();
 
   return (
@@ -46,19 +51,19 @@ export default function Comment({ comment }: CommentProps) {
         </div>
       )}
       {showReplyForm ? (
-        <form className="flex gap-2 w-full ">
-          <input
-            type="text"
-            className="w-full max-w-xl p-1.5 border rounded-md border-zinc-600"
-          />
-          <button className="px-4 text-white rounded-md bg-zinc-800">
-            Reply
-          </button>
-        </form>
+        <CommentReplyForm
+          setComments={setComments}
+          comment={comment}
+          setShowReplyForm={setShowReplyForm}
+        />
       ) : null}
       {comment.children.length
         ? comment.children.map((comment: CommentType) => (
-            <Comment key={comment.message} comment={comment} />
+            <Comment
+              setComments={setComments}
+              key={comment.message}
+              comment={comment}
+            />
           ))
         : null}
     </div>

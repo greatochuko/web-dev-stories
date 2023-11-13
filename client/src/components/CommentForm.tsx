@@ -2,21 +2,22 @@ import { postComment } from "../services/commentServices";
 import { useState } from "react";
 import { CommentType } from "./Comment";
 import useUserContext from "../hooks/useUserContext";
+import { useParams } from "react-router-dom";
 
 type CommentFormProps = {
-  postId: string;
   setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
 };
 
-export default function CommentForm({ postId, setComments }: CommentFormProps) {
+export default function CommentForm({ setComments }: CommentFormProps) {
   const [message, setmessage] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useUserContext();
+  const { postId } = useParams<string>();
 
   async function handleCreateComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    const data = await postComment(message, postId);
+    const data = await postComment(message, postId as string);
 
     if (data.error) {
       setLoading(false);
@@ -45,7 +46,7 @@ export default function CommentForm({ postId, setComments }: CommentFormProps) {
       ></textarea>
       <button
         disabled={loading}
-        className="px-4 py-2 ml-auto text-white rounded-md bg-zinc-800 hover:bg-zinc-900 duration-200"
+        className="px-4 py-2 ml-auto text-white rounded-md bg-zinc-800 hover:bg-zinc-900 duration-200 disabled:bg-zinc-500"
       >
         {loading ? "Loading" : "Comment"}
       </button>

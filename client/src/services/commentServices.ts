@@ -11,12 +11,16 @@ export async function fetchComments(postId: string) {
   }
 }
 
-export async function postComment(message: string, postId: string) {
+export async function postComment(
+  message: string,
+  postId: string,
+  parent?: string
+) {
   try {
     const res = await fetch(`${BASE_URL}/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, postId }),
+      body: JSON.stringify({ message, postId, parent }),
     });
     const data = await res.json();
     return data;

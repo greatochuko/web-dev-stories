@@ -5,18 +5,16 @@ import CommentForm from "./CommentForm";
 
 type CommentSectionProps = {
   comments: CommentType[];
-  postId: string;
   setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
 };
 
 export default function CommentSection({
   comments,
   setComments,
-  postId,
 }: CommentSectionProps) {
   const { user } = useUserContext();
   const sortedComments = comments
-    .map((a) => a)
+    .filter((comment) => !comment.parent)
     .sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -25,10 +23,14 @@ export default function CommentSection({
   return (
     <div className="flex flex-col gap-4">
       <h3 className="text-2xl ">Comments</h3>
-      {user && <CommentForm setComments={setComments} postId={postId} />}
+      {user && <CommentForm setComments={setComments} />}
       <div className="flex flex-col gap-2">
         {sortedComments.map((comment) => (
-          <Comment key={comment._id} comment={comment} />
+          <Comment
+            key={comment._id}
+            comment={comment}
+            setComments={setComments}
+          />
         ))}
       </div>
     </div>

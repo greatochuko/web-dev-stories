@@ -40,7 +40,6 @@ export default function BlogPostDetail() {
         <PostDetails post={post} />
         <CommentSection
           setComments={setComments}
-          postId={postId as string}
           comments={comments as CommentType[]}
         />
         <SimilarPosts />
