@@ -18,7 +18,12 @@ export default function CommentForm({ postId, setComments }: CommentFormProps) {
     setLoading(true);
     const data = await postComment(message, postId);
 
-    if (data.error) return setLoading(false);
+    if (data.error) {
+      setLoading(false);
+      setmessage("");
+      return;
+    }
+    setmessage("");
     setComments(data);
     setLoading(false);
   }
@@ -26,10 +31,10 @@ export default function CommentForm({ postId, setComments }: CommentFormProps) {
   return (
     <form
       onSubmit={handleCreateComment}
-      className="flex flex-col focus-within:shadow-lg flex-1 gap-2 md:gap-4 border-zinc-400 border rounded-md p-2"
+      className="flex flex-col focus-within:shadow-lg flex-1 gap-2 md:gap-4 border-zinc-400 border rounded-md p-2 md:p-4"
     >
-      <div className="flex gap-2 md:gap-4 font-semibold items-center">
-        <div className="w-8 rounded-full aspect-square bg-zinc-300 "></div>
+      <div className="flex gap-2 font-semibold items-center">
+        <div className="w-10 rounded-full aspect-square bg-zinc-300 "></div>
         <h2>{user.fullName}</h2>
       </div>
       <textarea
