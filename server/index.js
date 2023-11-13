@@ -6,6 +6,7 @@ import postRouter from "./routes/postRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import searchRouter from "./routes/searchRoutes.js";
 import cors from "cors";
+import commentRouter from "./routes/commentRoutes.js";
 
 dotenv.config();
 

@@ -14,7 +14,7 @@ export default function Featured() {
     getPosts();
   }, []);
   return (
-    <section className="p-4 w-full  text-zinc-700 max-w-7xl sm:w-[90%] mx-auto mb-8">
+    <section className="p-4 w-full  text-zinc-700 max-w-7xl mx-auto mb-8">
       <h1 className="mb-4 text-2xl font-bold">Featured Blog Posts</h1>
       <div className="grid w-full gap-8 md:grid-cols-2">
         {posts.map((post, i) => (

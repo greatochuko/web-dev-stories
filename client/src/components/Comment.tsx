@@ -1,12 +1,8 @@
 import { useState } from "react";
-
-type Comment = {
-  name: string;
-  children: Comment[];
-};
+import { Comment as CommentType } from "./CommentSection";
 
 export type CommentProps = {
-  comment: Comment;
+  comment: CommentType;
 };
 
 export default function Comment({ comment }: CommentProps) {
@@ -49,8 +45,8 @@ export default function Comment({ comment }: CommentProps) {
           </form>
         ) : null}
         {comment.children.length
-          ? comment.children.map((comment: Comment) => (
-              <Comment key={comment.name} comment={comment} />
+          ? comment.children.map((comment: CommentType) => (
+              <Comment key={comment.message} comment={comment} />
             ))
           : null}
       </div>

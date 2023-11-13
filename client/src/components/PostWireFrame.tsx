@@ -9,13 +9,11 @@ export default function PostWireFrame() {
         </div>
 
         <p className="bg-zinc-400 animate-slowpulse rounded-full w-full py-3"></p>
-        <p className="text-base">
-          <div className="w-full p-3 rounded-full bg-zinc-400 animate-slowpulse"></div>
-          <div className="flex gap-2 items-center">
-            <div className="w-[60%] p-3 rounded-full mt-1 bg-zinc-400 animate-slowpulse"></div>
-            <span className="text-sm w-10 bg-zinc-400 animate-slowpulse py-3 rounded-full"></span>
-          </div>
-        </p>
+        <div className="w-full p-3 rounded-full bg-zinc-400 animate-slowpulse"></div>
+        <div className="flex gap-2 items-center">
+          <div className="w-[60%] p-3 rounded-full mt-1 bg-zinc-400 animate-slowpulse"></div>
+          <span className="text-sm w-10 bg-zinc-400 animate-slowpulse py-3 rounded-full"></span>
+        </div>
       </div>
     </div>
   );
