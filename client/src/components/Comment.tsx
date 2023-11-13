@@ -40,20 +40,12 @@ export default function Comment({
       </div>
       <p>{comment.message}</p>
       {user && (
-        <div className="flex gap-3 text-lg text-zinc-800">
-          <button className="bg-zinc-100 px-1 rounded-md border  border-zinc-200 hover:bg-zinc-200 active:scale-95 duration-100">
-            <i className="fa-regular fa-thumbs-down"></i>
-          </button>
-          <button className="bg-zinc-100 px-1 rounded-md border  border-zinc-200 hover:bg-zinc-200 active:scale-95 duration-100">
-            <i className="fa-regular fa-thumbs-up"></i>
-          </button>
-          <button
-            className="bg-zinc-100 px-2 rounded-md border  border-zinc-200 hover:bg-zinc-200 active:scale-95 duration-100"
-            onClick={() => setShowReplyForm((curr) => !curr)}
-          >
-            Reply
-          </button>
-        </div>
+        <button
+          className="bg-zinc-100 px-2 rounded-md border w-fit border-zinc-200 hover:bg-zinc-200 active:scale-95 duration-100"
+          onClick={() => setShowReplyForm((curr) => !curr)}
+        >
+          Reply
+        </button>
       )}
       {showReplyForm ? (
         <CommentReplyForm

@@ -25,20 +25,26 @@ export default function CommentSection({
       <h3 className="text-2xl ">Comments</h3>
       {user && <CommentForm setComments={setComments} />}
       <div className="flex flex-col gap-2">
-        {sortedComments.map((comment) => (
-          <Comment
-            children={comments
-              .filter((c) => c.parent)
-              .sort(
-                (a, b) =>
-                  new Date(b.createdAt).getTime() -
-                  new Date(a.createdAt).getTime()
-              )}
-            key={comment._id}
-            comment={comment}
-            setComments={setComments}
-          />
-        ))}
+        {sortedComments.length ? (
+          sortedComments.map((comment) => (
+            <Comment
+              children={comments
+                .filter((c) => c.parent)
+                .sort(
+                  (a, b) =>
+                    new Date(b.createdAt).getTime() -
+                    new Date(a.createdAt).getTime()
+                )}
+              key={comment._id}
+              comment={comment}
+              setComments={setComments}
+            />
+          ))
+        ) : (
+          <p className="text-center text-zinc-400">
+            No Comments, Be the first to comment
+          </p>
+        )}
       </div>
     </div>
   );

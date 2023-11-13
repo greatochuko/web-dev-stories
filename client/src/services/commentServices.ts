@@ -5,9 +5,8 @@ export async function fetchComments(postId: string) {
     const res = fetch(`${BASE_URL}/comments/${postId}`);
     const data = (await res).json();
     return data;
-  } catch (e) {
-    const err = e as Error;
-    return { error: err };
+  } catch (err) {
+    return { error: (err as Error).message };
   }
 }
 
@@ -24,9 +23,7 @@ export async function postComment(
     });
     const data = await res.json();
     return data;
-  } catch (e) {
-    const err = e as Error;
-
-    return { error: err };
+  } catch (err) {
+    return { error: (err as Error).message };
   }
 }
