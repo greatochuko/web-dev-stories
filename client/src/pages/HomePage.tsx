@@ -22,18 +22,20 @@ export default function HomePage() {
     <main className="flex flex-col ">
       <Featured />
       <NewsLetter />
-      <PostGrid
-        posts={posts}
-        loading={loading}
-        title="Latest"
-        url="/search/?q=&sortBy=latest"
-      />
-      <PostGrid
-        posts={posts}
-        loading={loading}
-        title="Popular"
-        url="/search/?q=&sortBy=popular"
-      />
+      <div className="p-[5%] md:px-[10%] bg-zinc-100">
+        <PostGrid
+          posts={posts}
+          loading={loading}
+          title="Latest"
+          url="/search/?q=&sortBy=latest"
+        />
+        <PostGrid
+          posts={posts}
+          loading={loading}
+          title="Popular"
+          url="/search/?q=&sortBy=popular"
+        />
+      </div>
     </main>
   );
 }

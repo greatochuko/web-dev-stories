@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
@@ -6,7 +6,7 @@ import BlogPostDetail from "./pages/BlogPostDetail";
 import Categories from "./pages/Categories";
 import Profile from "./pages/Profile";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <AppLayout />,
     children: [

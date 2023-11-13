@@ -18,10 +18,12 @@ export default function Post({ post }: { post: Post }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="w-full aspect-[1.5] bg-zinc-400"></div>
+      <div className="w-full aspect-[1.5] bg-zinc-300 rounded-md"></div>
       <div className="flex flex-col gap-2 mt-1">
         <div className="flex items-center gap-2 text-base">
-          <p className="bg-[#eee] rounded-sm px-2 py-1 ">React</p>
+          <p className="bg-[#eee] rounded-sm px-2 py-1 capitalize">
+            {post.category}
+          </p>
           <p className="font-semibold">5 min read</p>
           {user?._id === post.author._id ? (
             <div className="ml-auto">
