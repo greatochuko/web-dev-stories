@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import PostDetails from "../components/PostDetails";
 import { fetchComments } from "../services/commentServices";
 
-export default function BlogPostDetail() {
+export default function BlogPostDetailPage() {
   const { postId } = useParams<string>();
   const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<CommentType[] | null>(null);

@@ -2,9 +2,9 @@ import { RouterProvider, createHashRouter } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
-import BlogPostDetail from "./pages/BlogPostDetail";
-import Categories from "./pages/Categories";
-import Profile from "./pages/Profile";
+import BlogPostDetailPage from "./pages/BlogPostDetailPage";
+import CategoriesPage from "./pages/CategoriesPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const router = createHashRouter([
   {
@@ -14,10 +14,10 @@ const router = createHashRouter([
       { path: "/search", element: <SearchPage /> },
       {
         path: "/post/:postId",
-        element: <BlogPostDetail />,
+        element: <BlogPostDetailPage />,
       },
-      { path: "/categories", element: <Categories /> },
-      { path: "/profile/:userId", element: <Profile /> },
+      { path: "/categories", element: <CategoriesPage /> },
+      { path: "/profile/:userId", element: <ProfilePage /> },
     ],
   },
 ]);

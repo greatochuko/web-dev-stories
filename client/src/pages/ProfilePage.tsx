@@ -5,7 +5,7 @@ import { User } from "../context/userContext";
 import { fetchUserProfile } from "../services/userServices";
 import useUserContext from "../hooks/useUserContext";
 
-export default function Profile() {
+export default function ProfilePage() {
   const { userId } = useParams();
   const [userProfile, setUserProfile] = useState<User | null>(null);
   const { user } = useUserContext();
