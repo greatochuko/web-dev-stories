@@ -27,6 +27,13 @@ export default function CommentSection({
       <div className="flex flex-col gap-2">
         {sortedComments.map((comment) => (
           <Comment
+            children={comments
+              .filter((c) => c.parent)
+              .sort(
+                (a, b) =>
+                  new Date(b.createdAt).getTime() -
+                  new Date(a.createdAt).getTime()
+              )}
             key={comment._id}
             comment={comment}
             setComments={setComments}

@@ -15,15 +15,20 @@ export type CommentType = {
 export type CommentProps = {
   comment: CommentType;
   setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
+  children: CommentType[];
 };
 
-export default function Comment({ comment, setComments }: CommentProps) {
+export default function Comment({
+  comment,
+  setComments,
+  children,
+}: CommentProps) {
   const [showReplyForm, setShowReplyForm] = useState(false);
 
   const { user } = useUserContext();
 
   return (
-    <div className="flex flex-col text-zinc-700 gap-2 pl-2 mt-6 border-l-2 border-zinc-300">
+    <div className="flex flex-col text-zinc-700 gap-2 pl-3 mt-6 border-l border-zinc-300">
       <div className="flex gap-2 items-center">
         <div className="w-10 border-2 border-white rounded-full aspect-square bg-zinc-300"></div>
         <h4 className="text-lg font-semibold">
@@ -57,14 +62,17 @@ export default function Comment({ comment, setComments }: CommentProps) {
           setShowReplyForm={setShowReplyForm}
         />
       ) : null}
-      {comment.children.length
-        ? comment.children.map((comment: CommentType) => (
-            <Comment
-              setComments={setComments}
-              key={comment.message}
-              comment={comment}
-            />
-          ))
+      {children.length
+        ? children
+            .filter((c) => c.parent === comment._id)
+            .map((comment: CommentType) => (
+              <Comment
+                children={children.filter((c) => c.parent === comment._id)}
+                setComments={setComments}
+                key={comment.message}
+                comment={comment}
+              />
+            ))
         : null}
     </div>
   );
