@@ -16,6 +16,8 @@ export type Post = {
 export default function Post({ post }: { post: Post }) {
   const { user } = useUserContext();
 
+  console.log(post);
+
   return (
     <div className="flex flex-col gap-2">
       <div className="w-full aspect-[1.5] bg-zinc-300 rounded-md"></div>

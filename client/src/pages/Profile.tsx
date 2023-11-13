@@ -1,15 +1,14 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Post from "../components/Post";
 import { useState, useEffect } from "react";
 import { User } from "../context/userContext";
 import { fetchUserProfile } from "../services/userServices";
-// import useUserContext from "../hooks/useUserContext";
-// import { fetchUser } from "../services/userServices";
+import useUserContext from "../hooks/useUserContext";
 
 export default function Profile() {
   const { userId } = useParams();
-
   const [userProfile, setUserProfile] = useState<User | null>(null);
+  const { user } = useUserContext();
 
   useEffect(() => {
     async function getUserProfile() {
@@ -28,12 +27,20 @@ export default function Profile() {
             <h1 className="text-3xl font-semibold">{userProfile?.fullName}</h1>
             <h2>Full Stack Developer</h2>
           </div>
-          <div className="flex justify-between w-full gap-4 text-zinc-700">
+          {user._id === userProfile._id ? (
+            <Link
+              to={"/create"}
+              className="py-2 px-4 rounded-md bg-zinc-50 border border-zinc-100"
+            >
+              Create New Post
+            </Link>
+          ) : null}
+          <div className="flex justify-between w-full max-w-3xl gap-4 text-zinc-700">
             <div className="flex flex-col items-center flex-1 p-2 rounded-md shadow-md">
               <h3 className="text-lg font-bold text-center">
                 {userProfile?.posts.length}
               </h3>
-              <p>Posts</p>
+              <p>{userProfile?.posts.length > 1 ? "Posts" : "Post"}</p>
             </div>
             <div className="flex flex-col items-center flex-1 p-2 rounded-md shadow-md">
               <h3 className="text-lg font-bold text-center">
@@ -54,7 +61,7 @@ export default function Profile() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {userProfile?.posts.map((post) => (
-            <Post key={post._id} />
+            <Post post={post} key={post._id} />
           ))}
         </div>
       </div>

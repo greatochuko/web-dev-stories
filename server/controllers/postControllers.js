@@ -11,14 +11,14 @@ export async function getPosts(req, res) {
 
 export async function createPost(req, res) {
   const { title, content, category } = req.body;
-  const author = await User.findById(req.userId);
   try {
     const newPost = await Post.create({
       title,
       content,
-      author,
+      author: req.userId,
       category,
     });
+    await User.findByIdAndUpdate(req.userId, { $push: { posts: newPost._id } });
     res.json(newPost);
   } catch (err) {
     res.status(400).json({ error: err.message });
