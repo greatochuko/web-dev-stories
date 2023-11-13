@@ -16,8 +16,6 @@ export type Post = {
 export default function Post({ post }: { post: Post }) {
   const { user } = useUserContext();
 
-  console.log(post);
-
   return (
     <div className="flex flex-col gap-2">
       <div className="w-full aspect-[1.5] bg-zinc-300 rounded-md"></div>
@@ -43,7 +41,7 @@ export default function Post({ post }: { post: Post }) {
           {post.title}
         </Link>
         <p className="text-base">
-          {post.content.split(" ").slice(0, 7).join(" ")}...
+          {/* {post.content?.split(" ").slice(0, 7).join(" ")}... */}
           <Link
             className="text-sm text-blue-600 w-fit hover:underline ml-2"
             to={`/post/${post._id}`}

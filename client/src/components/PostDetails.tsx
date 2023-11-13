@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Post } from "./Post";
+import Output from "editorjs-react-renderer";
 
 export default function PostDetails({ post }: { post: Post }) {
   return (
-    <div className="flex-1 py-6 mx-auto">
+    <div className="flex-1 py-6 w-full mx-auto">
       <p className="mb-4">Blog &gt; {post?.title}</p>
       <h1 className="text-2xl font-semibold">{post?.title}</h1>
       <Link to={"/creators"} className="flex items-center gap-2 my-4">
@@ -14,7 +15,7 @@ export default function PostDetails({ post }: { post: Post }) {
         </div>
       </Link>
       <div className="w-full aspect-[1.5] md:aspect-[2] bg-zinc-400"></div>
-      <p className="mt-4">{post?.content}</p>
+      <Output data={post.content} />
     </div>
   );
 }

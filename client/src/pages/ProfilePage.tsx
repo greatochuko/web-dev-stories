@@ -30,7 +30,7 @@ export default function ProfilePage() {
           {user._id === userProfile._id ? (
             <Link
               to={"/create"}
-              className="py-2 px-4 rounded-md bg-zinc-50 border border-zinc-100"
+              className="py-2 px-4 rounded-md bg-zinc-100 border border-zinc-200"
             >
               Create New Post
             </Link>
