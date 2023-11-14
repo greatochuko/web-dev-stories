@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Post } from "./Post";
-import Output from "editorjs-react-renderer";
 
 export default function PostDetails({ post }: { post: Post }) {
   return (
@@ -15,7 +14,7 @@ export default function PostDetails({ post }: { post: Post }) {
         </div>
       </Link>
       <div className="w-full aspect-[1.5] md:aspect-[2] bg-zinc-400"></div>
-      <Output data={post.content} />
+      <p>{post.content}</p>
     </div>
   );
 }

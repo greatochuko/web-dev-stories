@@ -1,26 +1,42 @@
-import EditorJS, { OutputData } from "@editorjs/editorjs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createPost } from "../services/postServices";
 
 export default function CreatePostPage() {
-  const [editor, setEditor] = useState<EditorJS | null>(null);
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setEditor(new EditorJS("editor"));
-  }, []);
-
-  async function publishBlog() {
-    const content = await editor?.save();
-    console.log(content);
-
-    const data = await createPost("title", content as OutputData, "react");
-    console.log(data);
+  async function publishBlog(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    await createPost("title", "content", "react");
+    setLoading(false);
   }
 
   return (
-    <div className="max-w-7xl w-[90%] mx-auto">
-      <div id="editor" className="border border-zinc-400"></div>
-      <button onClick={publishBlog}>Save</button>
-    </div>
+    <form
+      className="max-w-4xl w-[90%] mx-auto my-10 flex flex-col gap-4"
+      onSubmit={publishBlog}
+    >
+      <label
+        htmlFor="banner"
+        className=" w-full aspect-[2] text-6xl text-zinc-400 hover:text-zinc-500 bg-zinc-100 border border-zinc-200  flex items-center justify-center cursor-pointer hover:bg-zinc-200 duration-300"
+      >
+        <i className="fa-regular fa-image"></i>
+      </label>
+      <input className="hidden" type="file" name="" id="banner" />
+      <textarea
+        value={description}
+        placeholder="Write a Short Description about your Blog"
+        onChange={(e) => setDescription(e.target.value)}
+        className="w-full h-32 outline-none border rounded-md p-2"
+      ></textarea>
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full text-white font-semibold text-xl rounded-md p-4 bg-zinc-800 disabled:bg-zinc-500"
+      >
+        {loading ? "Publishing Your Blog..." : "Publish"}
+      </button>
+    </form>
   );
 }

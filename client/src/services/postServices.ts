@@ -1,4 +1,3 @@
-import { OutputData } from "@editorjs/editorjs";
 import { BASE_URL } from "./userServices";
 
 export async function fetchPosts() {
@@ -39,7 +38,7 @@ export async function searchPosts(query: string) {
 
 export async function createPost(
   title: string,
-  content: OutputData,
+  content: string,
   category: string
 ) {
   const token = localStorage.getItem("token");
