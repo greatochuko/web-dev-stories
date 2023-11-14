@@ -17,7 +17,7 @@ export default function Featured() {
     <section className="w-full py-4 px-[5%] text-zinc-700 max-w-7xl mx-auto mb-8">
       <h1 className="mb-4 text-2xl font-bold">Featured Blog Posts</h1>
       <div className="grid w-full gap-8 md:grid-cols-2 ">
-        {posts.map((post, i) => (
+        {posts.slice(0, 3).map((post, i) => (
           <div
             key={i}
             className={`flex flex-col gap-2 ${

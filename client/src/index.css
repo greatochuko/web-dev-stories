@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-li {
-  list-style: none;
+ul li {
+  list-style: disc;
+  list-style-position: inside;
+}
+
+ol li {
+  list-style: decimal;
+  list-style-position: inside;
 }

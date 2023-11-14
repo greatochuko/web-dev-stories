@@ -15,18 +15,18 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed top-0 z-10 w-full bg-white">
-        <nav className="flex items-center justify-between px-4 py-2 shadow-md h-14 sm:px-8">
+        <nav className="flex items-center justify-between px-4 py-2 shadow-md h-14 sm:px-8  ">
           <Link to={"/"} className="flex h-full p-1 md:p-0">
             <img src="/favicon.png" alt="logo" className="h-full" />
             <img src="/logo.png" alt="logo" className="h-full" />
           </Link>
           <SearchForm />
           <ul
-            className={`gap-6 items-center text-zinc-600 top-[54px] pt-4 lg:pt-0 duration-300 absolute lg:static lg:bg-transparent flex flex-col w-44 h-screen lg:h-fit  bg-white shadow-md pb-4 lg:pb-0 lg:w-fit lg:flex-row  lg:shadow-none ${
+            className={`gap-6 items-center text-zinc-600 top-[54px] pt-4 lg:pt-0 duration-300 absolute lg:static lg:bg-transparent flex flex-col w-52 h-screen lg:h-fit  bg-white shadow-md pb-4 lg:pb-0 lg:w-fit lg:flex-row  lg:shadow-none ${
               navIsOpen ? "right-0" : " -right-full"
             }`}
           >
-            <li>
+            <li className="list-none ">
               <Link
                 onClick={() => setNavIsOpen(false)}
                 className={`p-2 ${pathname === "/" ? "font-semibold" : ""}`}
@@ -35,7 +35,7 @@ export default function Navbar() {
                 Home
               </Link>
             </li>
-            <li>
+            <li className="list-none ">
               <Link
                 onClick={() => setNavIsOpen(false)}
                 className={`p-2 ${
@@ -46,7 +46,7 @@ export default function Navbar() {
                 Popular
               </Link>
             </li>
-            <li>
+            <li className="list-none ">
               <Link
                 onClick={() => setNavIsOpen(false)}
                 className="p-2 "
@@ -57,7 +57,7 @@ export default function Navbar() {
             </li>
             {user ? (
               <>
-                <li>
+                <li className="list-none ">
                   <Link
                     onClick={() => setNavIsOpen(false)}
                     className="p-2 "
@@ -66,7 +66,7 @@ export default function Navbar() {
                     Profile
                   </Link>
                 </li>
-                <li>
+                <li className="list-none ">
                   <button
                     onClick={() => {
                       setNavIsOpen(false);
@@ -81,7 +81,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <li>
+                <li className="list-none ">
                   <button
                     onClick={() => {
                       setNavIsOpen(false);
@@ -92,7 +92,7 @@ export default function Navbar() {
                     Login
                   </button>
                 </li>
-                <li>
+                <li className="list-none ">
                   <button
                     onClick={() => {
                       setNavIsOpen(false);
