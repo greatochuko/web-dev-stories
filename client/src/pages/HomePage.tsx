@@ -24,13 +24,13 @@ export default function HomePage() {
       <NewsLetter />
       <div className="p-[5%] md:px-[10%] bg-zinc-100">
         <PostGrid
-          posts={posts}
+          posts={posts.map((a) => a).splice(0, 4)}
           loading={loading}
           title="Latest"
           url="/search/?q=&sortBy=latest"
         />
         <PostGrid
-          posts={posts}
+          posts={posts.map((a) => a).splice(0, 4)}
           loading={loading}
           title="Popular"
           url="/search/?q=&sortBy=popular"

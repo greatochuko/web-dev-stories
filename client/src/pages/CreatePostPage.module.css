@@ -1,0 +1,36 @@
+/* Reset or normalize heading styles */
+
+.editor h1,
+.editor h2,
+.editor h3,
+.editor h4,
+.editor h5,
+.editor h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.editor h1 {
+  font-size: 2em !important;
+}
+
+.editor h2 {
+  font-size: 1.5em !important;
+}
+
+.editor h3 {
+  font-size: 1.17em !important;
+}
+
+.editor h4 {
+  font-size: 1em !important;
+}
+
+.editor h5 {
+  font-size: 0.83em !important;
+}
+
+.editor h6 {
+  font-size: 0.67em !important;
+}

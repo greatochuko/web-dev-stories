@@ -5,6 +5,7 @@ import SearchPage from "./pages/SearchPage";
 import BlogPostDetailPage from "./pages/BlogPostDetailPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import ProfilePage from "./pages/ProfilePage";
+import CreatePostPage from "./pages/CreatePostPage";
 
 const router = createHashRouter([
   {
@@ -18,6 +19,7 @@ const router = createHashRouter([
       },
       { path: "/categories", element: <CategoriesPage /> },
       { path: "/profile/:userId", element: <ProfilePage /> },
+      { path: "/create", element: <CreatePostPage /> },
     ],
   },
 ]);

@@ -35,3 +35,25 @@ export async function searchPosts(query: string) {
     return { error: err.message };
   }
 }
+
+export async function createPost(
+  title: string,
+  content: string,
+  category: string
+) {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await fetch(`${BASE_URL}/posts`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, content, category }),
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return { error: (err as Error).message };
+  }
+}
