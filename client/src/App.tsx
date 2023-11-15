@@ -20,6 +20,7 @@ const router = createHashRouter([
       { path: "/categories", element: <CategoriesPage /> },
       { path: "/profile/:userId", element: <ProfilePage /> },
       { path: "/create", element: <CreatePostPage /> },
+      { path: "/edit/:postId", element: <CreatePostPage /> },
     ],
   },
 ]);

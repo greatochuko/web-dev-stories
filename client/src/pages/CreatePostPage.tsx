@@ -1,27 +1,57 @@
-import { useState } from "react";
-import { createPost } from "../services/postServices";
+import { useState, useEffect } from "react";
+import { createPost, fetchPost, updatePost } from "../services/postServices";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { PostType } from "../components/Post";
 
 export default function CreatePostPage() {
+  const { postId } = useParams();
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("react");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getPostToEdit() {
+      if (!postId) return;
+      const data: PostType & { error: string } = await fetchPost(
+        postId as string
+      );
+
+      if (data.error) return;
+      setTitle(data.title);
+      setContent(data.content);
+      setCategory(data.category);
+    }
+    getPostToEdit();
+  }, [postId]);
 
   async function publishBlog(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    await createPost(title, content, category);
+    const data = await createPost(title, content, category);
+    if (data.error) return;
+    navigate(-1);
+    setLoading(false);
+  }
+
+  async function updateBlog(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    const data = await updatePost(postId as string, title, content, category);
+    if (data.error) return;
+    navigate(-1);
     setLoading(false);
   }
 
   return (
     <form
       className="max-w-4xl w-[90%] mx-auto my-10 flex flex-col gap-4 text-zinc-800"
-      onSubmit={publishBlog}
+      onSubmit={postId ? updateBlog : publishBlog}
     >
       <label
         htmlFor="banner"
@@ -69,7 +99,7 @@ export default function CreatePostPage() {
         disabled={loading}
         className="w-full text-white font-semibold text-xl rounded-md p-4 bg-zinc-800 disabled:bg-zinc-500"
       >
-        {loading ? "Publishing Your Blog..." : "Publish"}
+        {loading ? "Publishing Your Blog..." : postId ? "Update" : "Publish"}
       </button>
     </form>
   );

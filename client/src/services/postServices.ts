@@ -58,6 +58,30 @@ export async function createPost(
   }
 }
 
+export async function updatePost(
+  postId: string,
+  title: string,
+  content: string,
+  category: string
+) {
+  const token = localStorage.getItem("token");
+  console.log(title, category);
+  try {
+    const res = await fetch(`${BASE_URL}/posts/${postId}`, {
+      method: "PUT",
+      body: JSON.stringify({ title, content, category }),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function deletePost(postId: string) {
   try {
     const res = await fetch(`${BASE_URL}/posts/${postId}`, {

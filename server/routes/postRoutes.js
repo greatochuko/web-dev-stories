@@ -13,7 +13,7 @@ const postRouter = Router();
 postRouter.get("/", getPosts);
 postRouter.post("/", authenticate, createPost);
 postRouter.get("/:postId", getPost);
-postRouter.put("/:postId", editPost);
-postRouter.delete("/:postId", deletePost);
+postRouter.put("/:postId", authenticate, editPost);
+postRouter.delete("/:postId", authenticate, deletePost);
 
 export default postRouter;

@@ -42,9 +42,12 @@ export default function Post({
             <p className="font-semibold">5 min read</p>
             {showButtons && user?._id === post.author._id ? (
               <div className="ml-auto">
-                <button className="px-2 py-1 hover:text-blue-500 duration-200">
+                <Link
+                  to={`/edit/${post._id}`}
+                  className="px-2 py-1 hover:text-blue-500 duration-200"
+                >
                   <i className="fa-solid fa-pen-to-square"></i>
-                </button>
+                </Link>
                 <button
                   onClick={() => setModalIsOpen(true)}
                   className="px-2 py-1 hover:text-red-600 duration-200"
