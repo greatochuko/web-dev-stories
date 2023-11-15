@@ -65,7 +65,6 @@ export async function updatePost(
   category: string
 ) {
   const token = localStorage.getItem("token");
-  console.log(title, category);
   try {
     const res = await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "PUT",

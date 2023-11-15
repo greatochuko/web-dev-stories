@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPost, fetchPost, updatePost } from "../services/postServices";
 
 import ReactQuill from "react-quill";
@@ -13,6 +13,9 @@ export default function CreatePostPage() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("react");
+  const [banner, setBanner] = useState<Blob | null>(null);
+  const [bannnerUrl, setBannerUrl] = useState("");
+  const { current: image } = useRef(new Image());
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,19 +51,57 @@ export default function CreatePostPage() {
     setLoading(false);
   }
 
+  function handleChangeBanner(e: React.ChangeEvent<HTMLInputElement>) {
+    const imageFile = (e.target.files as FileList)[0];
+    const MAX_WIDTH = 1000;
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(imageFile);
+    fileReader.onload = (e) => {
+      const imageUrl: string = e.target?.result as string;
+
+      image.src = imageUrl;
+      setBannerUrl(imageUrl);
+      const canvas = document.createElement("canvas");
+      const scaleSize = MAX_WIDTH / image.width;
+      canvas.height = image.height * scaleSize;
+      canvas.width = MAX_WIDTH;
+
+      const ctx = canvas.getContext("2d");
+      ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
+      ctx?.canvas.toBlob((blob) => {
+        setBanner(blob);
+      });
+    };
+  }
+
   return (
     <form
       className="max-w-4xl w-[90%] mx-auto my-10 flex flex-col gap-4 text-zinc-800"
       onSubmit={postId ? updateBlog : publishBlog}
     >
-      <label
-        htmlFor="banner"
-        className=" w-full aspect-[2] flex-col text-6xl text-zinc-400 hover:text-zinc-500 bg-zinc-100 border border-zinc-200  flex items-center justify-center cursor-pointer hover:bg-zinc-200 duration-300"
-      >
-        <i className="fa-regular fa-image"></i>
-        <p className="text-4xl">Click to Select Banner</p>
-      </label>
-      <input className="hidden" type="file" name="" id="banner" />
+      <div className="relative w-full aspect-[2] overflow-hidden  border border-zinc-200 ">
+        <label
+          htmlFor="banner"
+          className="w-full h-full absolute cursor-pointer  flex-col gap-2 text-zinc-300 hover:bg-black/50 bg-black/30 flex items-center hover:text-white justify-center duration-300"
+        >
+          <i className="fa-regular fa-image text-5xl"></i>
+          <p className="text-2xl">
+            Click to {banner ? "Change" : "Select"} Banner
+          </p>
+        </label>
+        <input
+          className="hidden"
+          onChange={handleChangeBanner}
+          type="file"
+          accept=".png, .jpg, .jpeg"
+          name=""
+          id="banner"
+        />
+        {banner ? (
+          <img src={bannnerUrl} className="h-full w-full object-cover" alt="" />
+        ) : null}
+      </div>
       <input
         type="text"
         value={title}
