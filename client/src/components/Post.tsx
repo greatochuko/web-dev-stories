@@ -19,9 +19,11 @@ export type PostType = {
 export default function Post({
   post,
   refreshPosts,
+  showButtons,
 }: {
   post: PostType;
   refreshPosts?: () => void;
+  showButtons?: boolean;
 }) {
   const { user } = useUserContext();
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -38,7 +40,7 @@ export default function Post({
               {post.category}
             </p>
             <p className="font-semibold">5 min read</p>
-            {user?._id === post.author._id ? (
+            {showButtons && user?._id === post.author._id ? (
               <div className="ml-auto">
                 <button className="px-2 py-1 hover:text-blue-500 duration-200">
                   <i className="fa-solid fa-pen-to-square"></i>

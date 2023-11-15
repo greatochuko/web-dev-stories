@@ -26,7 +26,7 @@ export default function ProfilePage() {
 
   if (!userProfile) return;
   return (
-    <div className="max-w-7xl w-[90%] mx-auto flex-1 py-4">
+    <div className="max-w-6xl w-[90%] mx-auto flex-1 py-4">
       <div className="flex flex-col gap-6 text-zinc-800">
         <div className="flex flex-col items-center gap-4">
           <div className="rounded-md h-28 aspect-square bg-zinc-500"></div>
@@ -68,7 +68,12 @@ export default function ProfilePage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {userProfile?.posts.map((post) => (
-            <Post post={post} key={post._id} refreshPosts={refreshPosts} />
+            <Post
+              showButtons
+              post={post}
+              key={post._id}
+              refreshPosts={refreshPosts}
+            />
           ))}
         </div>
       </div>
