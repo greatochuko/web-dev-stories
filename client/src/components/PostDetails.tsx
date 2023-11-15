@@ -14,7 +14,10 @@ export default function PostDetails({ post }: { post: Post }) {
         </div>
       </Link>
       <div className="w-full aspect-[1.5] md:aspect-[2] bg-zinc-400"></div>
-      <p>{post.content}</p>
+      <div
+        className="mt-4 flex flex-col gap-4"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      ></div>
     </div>
   );
 }

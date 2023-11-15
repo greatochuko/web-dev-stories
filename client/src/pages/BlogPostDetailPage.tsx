@@ -20,6 +20,7 @@ export default function BlogPostDetailPage() {
       setLoading(true);
       const postData = await fetchPost(postId as string);
       const commentsData = await fetchComments(postId as string);
+
       setComments(commentsData);
       setPost(postData);
       setLoading(false);

@@ -8,7 +8,7 @@ export default function ModalContainer({
   return (
     <div
       onClick={closeModal}
-      className="fixed top-0 z-20 flex items-center justify-center w-screen h-screen opacity-0 bg-black/50 animate-fade-in"
+      className="fixed left-0 top-0 z-20 flex items-center justify-center w-screen h-screen opacity-0 bg-black/50 animate-fade-in"
     >
       {children}
     </div>

@@ -27,7 +27,11 @@ export async function createPost(req, res) {
 
 export async function getPost(req, res) {
   try {
-    const post = await Post.findById(req.params.postId).populate({
+    const post = await Post.findByIdAndUpdate(
+      req.params.postId,
+      { $inc: { reads: 1 } },
+      { new: true }
+    ).populate({
       path: "author",
       select: "fullName",
     });
@@ -37,7 +41,8 @@ export async function getPost(req, res) {
       return res
         .status(404)
         .json({ error: `Post with id ${req.params.postId} does not exist` });
-    res.status(400).json({ error: err });
+
+    res.status(400).json({ error: err.message });
   }
 }
 

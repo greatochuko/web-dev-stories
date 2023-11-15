@@ -20,7 +20,7 @@ export async function fetchPost(postId: string) {
   } catch (e) {
     const err = e as Error;
 
-    return { error: err.message };
+    return err;
   }
 }
 
@@ -55,5 +55,17 @@ export async function createPost(
     return data;
   } catch (err) {
     return { error: (err as Error).message };
+  }
+}
+
+export async function deletePost(postId: string) {
+  try {
+    const res = await fetch(`${BASE_URL}/posts/${postId}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return error;
   }
 }

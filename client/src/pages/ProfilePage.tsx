@@ -10,6 +10,12 @@ export default function ProfilePage() {
   const [userProfile, setUserProfile] = useState<User | null>(null);
   const { user } = useUserContext();
 
+  async function refreshPosts() {
+    const data = await fetchUserProfile(userId as string);
+    if (data.error) return;
+    setUserProfile(data);
+  }
+
   useEffect(() => {
     async function getUserProfile() {
       const userProfile = await fetchUserProfile(userId as string);
@@ -17,6 +23,7 @@ export default function ProfilePage() {
     }
     getUserProfile();
   }, [userId]);
+
   if (!userProfile) return;
   return (
     <div className="max-w-7xl w-[90%] mx-auto flex-1 py-4">
@@ -61,7 +68,7 @@ export default function ProfilePage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {userProfile?.posts.map((post) => (
-            <Post post={post} key={post._id} />
+            <Post post={post} key={post._id} refreshPosts={refreshPosts} />
           ))}
         </div>
       </div>

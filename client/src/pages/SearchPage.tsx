@@ -27,9 +27,7 @@ export default function SearchPage() {
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   } else if (sortBy === "popular") {
-    filteredPosts = filteredPosts?.sort(
-      (a, b) => b.comments.length - a.comments.length
-    );
+    filteredPosts = filteredPosts?.sort((a, b) => b.reads - a.reads);
   }
 
   useEffect(() => {

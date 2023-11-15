@@ -1,4 +1,4 @@
-import Post, { Post as PostType } from "./Post";
+import Post, { PostType } from "./Post";
 import { Link } from "react-router-dom";
 import PostWireFrame from "./PostWireFrame";
 
