@@ -55,8 +55,8 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="flex-1 bg-zinc-100 px-[10%]">
-      <div className="flex flex-wrap my-6 items-center justify-between max-w-7xl mx-auto px-4">
+    <div className="flex-1 bg-zinc-100 px-[5%] md:px-[10%]">
+      <div className="flex flex-wrap my-6 items-center justify-between max-w-7xl mx-auto md:px-4">
         <h1 className="text-lg font-semibold ">Search results for '{query}'</h1>
         <div className="flex gap-4">
           <div className="flex items-center gap-2">

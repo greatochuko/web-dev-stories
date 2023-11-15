@@ -18,7 +18,7 @@ export default function SimilarPosts() {
 
   return (
     <PostGrid
-      posts={posts}
+      posts={posts.slice(0, 4)}
       loading={loading}
       grayBg={false}
       title="Read More"
