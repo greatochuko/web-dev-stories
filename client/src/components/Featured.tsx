@@ -7,8 +7,6 @@ export default function Featured() {
   const [posts, setPost] = useState<PostType[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log(currentIndex);
-
   useEffect(() => {
     async function getPosts() {
       const data = await fetchPosts();
