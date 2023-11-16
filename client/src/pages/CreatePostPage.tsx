@@ -152,6 +152,8 @@ export default function CreatePostPage() {
         >
           <option value="javascript">Javascript</option>
           <option value="react">React</option>
+          <option value="express">Express</option>
+          <option value="mongodb">Mongo DB</option>
         </select>
       </div>
       <ReactQuill

@@ -54,7 +54,7 @@ export default function SearchPage() {
 
   return (
     <div className="flex-1 bg-zinc-100 px-[5%] md:px-[10%]">
-      <div className="flex flex-wrap my-6 items-center justify-between max-w-7xl mx-auto md:px-4">
+      <div className="flex flex-wrap items-center justify-between mx-auto my-6 max-w-7xl md:px-4">
         <h1 className="text-lg font-semibold ">Search results for '{query}'</h1>
         <div className="flex gap-4">
           <div className="flex items-center gap-2">
@@ -82,6 +82,8 @@ export default function SearchPage() {
               <option value="all">All</option>
               <option value="javascript">Javascript</option>
               <option value="react">React</option>
+              <option value="express">Express</option>
+              <option value="mongodb">Mongo DB</option>
             </select>
           </div>
         </div>
@@ -95,7 +97,7 @@ export default function SearchPage() {
       ) : posts?.length ? (
         <PostGrid posts={filteredPosts as PostType[]} />
       ) : (
-        <div className="w-full py-4 mb-10 flex justify-center">
+        <div className="flex justify-center w-full py-4 mb-10">
           No post match the query '{query}'
         </div>
       )}
