@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import PostGrid from "../components/PostGrid";
 import React, { useState, useEffect } from "react";
 import { searchPosts } from "../services/postServices";
-import { Post } from "../components/Post";
+import { PostType } from "../components/Post";
 import PostWireFrame from "../components/PostWireFrame";
 
 export default function SearchPage() {
@@ -11,9 +11,9 @@ export default function SearchPage() {
   const [sortBy, setSortBy] = useState(params.get("sortBy") || "latest");
   const [category, setCategory] = useState(params.get("category") || "all");
 
-  const [posts, setPost] = useState<Post[] | null>(null);
+  const [posts, setPost] = useState<PostType[] | null>(null);
   const [loading, setLoading] = useState(false);
-  let filteredPosts: Post[] | null | undefined;
+  let filteredPosts: PostType[] | null | undefined;
 
   if (category === "all") {
     filteredPosts = posts?.map((a) => a);
@@ -93,7 +93,7 @@ export default function SearchPage() {
           <PostWireFrame />
         </div>
       ) : posts?.length ? (
-        <PostGrid posts={filteredPosts as Post[]} />
+        <PostGrid posts={filteredPosts as PostType[]} />
       ) : (
         <div className="w-full py-4 mb-10 flex justify-center">
           No post match the query '{query}'
