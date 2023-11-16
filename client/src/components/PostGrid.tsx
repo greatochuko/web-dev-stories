@@ -20,7 +20,7 @@ export default function PostGrid({
   return (
     <section className={`pb-10 ${grayBg ? "bg-zinc-100" : ""} text-zinc-700`}>
       {title && (
-        <h1 className="mb-4 font-semibold text-2xl max-w-7xl  mx-auto flex justify-between">
+        <h1 className="flex justify-between mx-auto mb-4 text-2xl font-semibold max-w-7xl">
           {title}
           {url && (
             <Link
@@ -37,7 +37,7 @@ export default function PostGrid({
           There are Currently no posts
         </h1>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4  max-w-7xl mx-auto ">
+        <div className="grid gap-4 mx-auto md:grid-cols-2 xl:grid-cols-4 max-w-7xl ">
           {loading ? (
             <>
               <PostWireFrame />

@@ -8,6 +8,9 @@ export default {
         "fade-in": "fadeIn .3s forwards",
         rotate: "rotate 1s infinite linear",
         slowpulse: "slowpulse 1.5s infinite linear",
+        "grow-shrink": "grow-shrink 700ms infinite linear",
+        "grow-shrink-2": "grow-shrink 700ms infinite 200ms linear",
+        "grow-shrink-3": "grow-shrink 700ms infinite 400ms linear",
       },
     },
     keyframes: {
@@ -19,8 +22,13 @@ export default {
       },
       slowpulse: {
         "0%": { opacity: 1 },
-        "50%": { opacity: 0.3 },
+        "50%": { opacity: 0.5 },
         "100%": { opacity: 1 },
+      },
+      "grow-shrink": {
+        "0%": { transform: "scaleY(100%)" },
+        "50%": { transform: "scaleY(250%)" },
+        "100%": { transform: "scaleY(100%)" },
       },
     },
   },

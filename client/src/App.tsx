@@ -6,6 +6,7 @@ import BlogPostDetailPage from "./pages/BlogPostDetailPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreatePostPage from "./pages/CreatePostPage";
+import LoadingIndicator from "./components/LoadingIndicator";
 
 const router = createHashRouter([
   {
@@ -21,6 +22,7 @@ const router = createHashRouter([
       { path: "/profile/:userId", element: <ProfilePage /> },
       { path: "/create", element: <CreatePostPage /> },
       { path: "/edit/:postId", element: <CreatePostPage /> },
+      { path: "/loading", element: <LoadingIndicator /> },
     ],
   },
 ]);

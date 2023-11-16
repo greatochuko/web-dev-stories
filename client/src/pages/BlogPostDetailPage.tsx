@@ -8,6 +8,7 @@ import { CommentType } from "../components/Comment";
 import { useEffect, useState } from "react";
 import PostDetails from "../components/PostDetails";
 import { fetchComments } from "../services/commentServices";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 export default function BlogPostDetailPage() {
   const { postId } = useParams<string>();
@@ -28,16 +29,11 @@ export default function BlogPostDetailPage() {
     getPost();
   }, [postId]);
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center flex-1 animate-pulse ">
-        Loading...
-      </div>
-    );
+  if (loading) return <LoadingIndicator />;
 
   if (post)
     return (
-      <main className="w-full flex flex-col gap-8 max-w-5xl p-6 mx-auto">
+      <main className="flex flex-col w-full max-w-5xl gap-8 p-6 mx-auto">
         <PostDetails post={post} />
         <CommentSection
           setComments={setComments}
