@@ -24,12 +24,16 @@ export default function ProfilePage() {
     getUserProfile();
   }, [userId]);
 
+  console.log(user.imageUrl);
+
   if (!userProfile) return;
   return (
     <div className="max-w-6xl w-[90%] mx-auto flex-1 py-4">
       <div className="flex flex-col gap-6 text-zinc-800">
         <div className="flex flex-col items-center gap-4">
-          <div className="rounded-md h-28 aspect-square bg-zinc-500"></div>
+          <div className="rounded-md h-28 aspect-square bg-zinc-500">
+            <img src={user.imageUrl} alt="" />
+          </div>
           <div className="flex flex-col items-center">
             <h1 className="text-3xl font-semibold">{userProfile?.fullName}</h1>
             <h2>Full Stack Developer</h2>
