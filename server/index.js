@@ -22,9 +22,11 @@ app.use("/api/user", userRouter);
 app.use("/api/search", searchRouter);
 app.use("/api/comments", commentRouter);
 
+const LOCAL_URI = "mongodb://127.0.0.1:27017/web-dev-stories";
+
 async function connectToServer() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/web-dev-stories");
+    await mongoose.connect(process.env.MONGODB_URI);
     app.listen(PORT, () => {
       console.log(`App running at port ${PORT}`);
     });
