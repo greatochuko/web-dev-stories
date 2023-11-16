@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import {
-  createPost,
-  fetchPost,
-  updatePost,
-  uploadPhoto,
-} from "../services/postServices";
+import { createPost, fetchPost, updatePost } from "../services/postServices";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { PostType } from "../components/Post";
+
+import storage from "../firebaseConfig";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default function CreatePostPage() {
   const { postId } = useParams();
@@ -19,9 +17,11 @@ export default function CreatePostPage() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("react");
   const [banner, setBanner] = useState<Blob | null>(null);
-  const [bannnerUrl, setBannerUrl] = useState("");
   const { current: image } = useRef(new Image());
   const navigate = useNavigate();
+
+  const cannotCreate = !title || !banner || !content;
+  const cannotUpdate = !title || !content;
 
   useEffect(() => {
     async function getPostToEdit() {
@@ -40,8 +40,14 @@ export default function CreatePostPage() {
 
   async function publishBlog(e: React.FormEvent) {
     e.preventDefault();
+    if (cannotCreate) return;
     setLoading(true);
-    const { url } = await uploadPhoto(banner as Blob);
+
+    console.log(banner);
+    const storageRef = ref(storage, `/posts/${crypto.randomUUID()}`);
+
+    const uploadTask = await uploadBytesResumable(storageRef, banner);
+    const url = await getDownloadURL(uploadTask.ref);
     const data = await createPost(title, content, category, url);
     if (data.error) return setLoading(false);
     navigate(-1);
@@ -50,8 +56,21 @@ export default function CreatePostPage() {
 
   async function updateBlog(e: React.FormEvent) {
     e.preventDefault();
+    if (cannotUpdate) return;
     setLoading(true);
-    const data = await updatePost(postId as string, title, content, category);
+    let url;
+    if (banner) {
+      const storageRef = ref(storage, `/posts/${crypto.randomUUID()}`);
+      const uploadTask = await uploadBytesResumable(storageRef, banner);
+      url = await getDownloadURL(uploadTask.ref);
+    }
+    const data = await updatePost(
+      postId as string,
+      title,
+      content,
+      category,
+      url
+    );
     if (data.error) return;
     navigate(-1);
     setLoading(false);
@@ -62,23 +81,28 @@ export default function CreatePostPage() {
     const MAX_WIDTH = 1000;
 
     const fileReader = new FileReader();
+    if (!imageFile) return;
     fileReader.readAsDataURL(imageFile);
-    fileReader.onload = (e) => {
-      const imageUrl: string = e.target?.result as string;
-
+    fileReader.onload = (fileReaderEvent) => {
+      const imageUrl: string = fileReaderEvent.target?.result as string;
       image.src = imageUrl;
-      setBannerUrl(imageUrl);
 
-      const canvas = document.createElement("canvas");
-      const scaleSize = MAX_WIDTH / image.width;
-      canvas.height = image.height * scaleSize;
-      canvas.width = MAX_WIDTH;
+      image.onload = (ev) => {
+        const eventTarget = ev.target as HTMLImageElement;
+        const canvas = document.createElement("canvas");
+        const scaleSize = MAX_WIDTH / eventTarget.width;
 
-      const ctx = canvas.getContext("2d");
-      ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
-      ctx?.canvas.toBlob((blob) => {
-        setBanner(blob);
-      });
+        canvas.height = eventTarget.height * scaleSize;
+        canvas.width = MAX_WIDTH;
+
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        ctx?.canvas.toBlob((blob) => {
+          new File([blob as Blob], imageFile.name);
+          setBanner(blob);
+        });
+      };
     };
   }
 
@@ -106,14 +130,15 @@ export default function CreatePostPage() {
           id="banner"
         />
         {banner ? (
-          <img src={bannnerUrl} className="h-full w-full object-cover" alt="" />
+          <img src={image.src} className="h-full w-full object-cover" alt="" />
         ) : null}
       </div>
-      <textarea
+      <input
+        type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
-        className="text-4xl font-semibold outline-none"
+        className="text-3xl font-semibold outline-none"
       />
       <div className="flex gap-4 font-semibold">
         <label htmlFor="category">Category</label>
@@ -143,8 +168,8 @@ export default function CreatePostPage() {
       ></textarea>
       <button
         type="submit"
-        disabled={loading}
-        className="w-full text-white font-semibold text-xl rounded-md p-4 bg-zinc-800 disabled:bg-zinc-500"
+        disabled={loading || (postId ? cannotUpdate : cannotCreate)}
+        className="w-full text-white disabled:cursor-not-allowed font-semibold text-xl rounded-md p-4 bg-zinc-800 disabled:bg-zinc-500"
       >
         {loading ? "Publishing Your Blog..." : postId ? "Update" : "Publish"}
       </button>

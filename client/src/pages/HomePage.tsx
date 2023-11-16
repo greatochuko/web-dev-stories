@@ -3,10 +3,10 @@ import NewsLetter from "../components/NewsLetter";
 import PostGrid from "../components/PostGrid";
 import { useState, useEffect } from "react";
 import { fetchPosts } from "../services/postServices";
-import { Post } from "../components/Post";
+import { PostType } from "../components/Post";
 
 export default function HomePage() {
-  const [posts, setPost] = useState<Post[]>([]);
+  const [posts, setPost] = useState<PostType[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,6 @@ export default function HomePage() {
   return (
     <main className="flex flex-col ">
       <Featured />
-      <NewsLetter />
       <div className="p-[5%] md:px-[10%] bg-zinc-100">
         <PostGrid
           posts={latestPosts.slice(0, 4)}
@@ -46,6 +45,7 @@ export default function HomePage() {
           url="/search/?q=&sortBy=popular"
         />
       </div>
+      <NewsLetter />
     </main>
   );
 }

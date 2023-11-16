@@ -8,6 +8,7 @@ export type User = {
   bio: string;
   email: string;
   posts: PostType[];
+  imageUrl: string;
 };
 
 export type UserProviderValue = {
@@ -19,7 +20,11 @@ export const UserContext = createContext<UserProviderValue | null>(null);
 
 const fetchedUser = await fetchUser();
 
-const initialUser = fetchedUser.error ? null : fetchedUser;
+if (fetchedUser === null) {
+  localStorage.removeItem("token");
+}
+
+const initialUser = fetchedUser?.error ? null : fetchedUser;
 
 export default function UserProvider({
   children,

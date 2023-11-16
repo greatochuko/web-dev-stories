@@ -65,13 +65,14 @@ export async function updatePost(
   postId: string,
   title: string,
   content: string,
-  category: string
+  category: string,
+  banner: string | undefined
 ) {
   const token = localStorage.getItem("token");
   try {
     const res = await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "PUT",
-      body: JSON.stringify({ title, content, category }),
+      body: JSON.stringify({ title, content, category, banner }),
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -97,24 +98,5 @@ export async function deletePost(postId: string) {
     return data;
   } catch (error) {
     return error;
-  }
-}
-
-export async function uploadPhoto(file: Blob | File) {
-  try {
-    const response = await fetch(
-      "https://www.filestackapi.com/api/store/S3?key=ATmxns9QQ2OhhpR6rmotZz",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "image/png",
-        },
-        body: file,
-      }
-    );
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    return { error: (err as Error).message };
   }
 }

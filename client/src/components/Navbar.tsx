@@ -129,6 +129,7 @@ export default function Navbar() {
           ) : (
             <AuthModal
               type={modal.type}
+              key={modal.type}
               setType={(type: string) =>
                 setModal((curr) => ({ ...curr, type: type }))
               }

@@ -32,18 +32,24 @@ export default function PostGrid({
           )}
         </h1>
       )}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4  max-w-7xl mx-auto ">
-        {loading ? (
-          <>
-            <PostWireFrame />
-            <PostWireFrame />
-            <PostWireFrame />
-            <PostWireFrame />
-          </>
-        ) : (
-          posts.map((post, i) => <Post post={post} key={i} />)
-        )}
-      </div>
+      {!posts.length ? (
+        <h1 className="w-full py-10 text-center">
+          There are Currently no posts
+        </h1>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4  max-w-7xl mx-auto ">
+          {loading ? (
+            <>
+              <PostWireFrame />
+              <PostWireFrame />
+              <PostWireFrame />
+              <PostWireFrame />
+            </>
+          ) : (
+            posts.map((post, i) => <Post post={post} key={i} />)
+          )}
+        </div>
+      )}
     </section>
   );
 }

@@ -13,7 +13,7 @@ export async function login(req, res) {
     const token = generateJwt(user.id);
     res.json({ token });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(401).json({ error: err.message });
   }
 }
 
@@ -33,6 +33,6 @@ export async function register(req, res) {
     if (err.message.includes("duplicate key error")) {
       errorMessage = "email already in use";
     }
-    res.status(400).json({ error: errorMessage });
+    res.status(401).json({ error: errorMessage });
   }
 }
