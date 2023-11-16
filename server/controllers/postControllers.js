@@ -4,7 +4,7 @@ import { User } from "../models/user.js";
 export async function getPosts(req, res) {
   const posts = await Post.find().populate({
     path: "author",
-    select: "fullName",
+    select: "fullName imageUrl",
   });
   res.json(posts);
 }

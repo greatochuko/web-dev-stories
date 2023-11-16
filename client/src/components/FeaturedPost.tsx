@@ -8,6 +8,8 @@ export default function FeaturedPost({
   post: PostType;
   hidden?: boolean;
 }) {
+  console.log(post.author);
+
   return (
     <Link
       to={`/post/${post._id}`}
@@ -22,7 +24,13 @@ export default function FeaturedPost({
         <h2 className="text-base md:text-2xl font-semibold">{post.title}</h2>
         <p>{new Date(post.createdAt).toDateString()}</p>
         <div className="flex gap-2 items-center">
-          <div className="w-10 aspect-square bg-zinc-500 rounded-full"></div>
+          <div className="w-10 aspect-square bg-zinc-500 rounded-full overflow-hidden">
+            <img
+              src={post.author.imageUrl}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
           <h3>{post.author.fullName}</h3>
         </div>
       </div>
