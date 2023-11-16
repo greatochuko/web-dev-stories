@@ -14,7 +14,7 @@ export default function HomePage() {
       setLoading(true);
       const data = await fetchPosts();
       setPost(data);
-      // setLoading(false);
+      setLoading(false);
     }
     getPosts();
   }, []);
