@@ -34,5 +34,3 @@ async function connectToServer() {
 }
 
 await connectToServer();
-
-export default app;
