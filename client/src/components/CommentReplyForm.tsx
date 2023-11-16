@@ -1,4 +1,4 @@
-import { postComment } from "../services/commentServices";
+import { fetchComments, postComment } from "../services/commentServices";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { CommentType } from "./Comment";
@@ -16,20 +16,20 @@ export default function CommentReplyForm({
 }: CommentReplyFormProps) {
   const [message, setmessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { postId } = useParams<string>();
+  const { postId } = useParams();
 
   async function handleReplyComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     const data = await postComment(message, postId as string, comment._id);
-
     if (data.error) {
       setLoading(false);
       setmessage("");
       return;
     }
+    const commentsData = await fetchComments(postId as string);
     setmessage("");
-    setComments(data);
+    setComments(commentsData);
     setLoading(false);
     setShowReplyForm(false);
   }

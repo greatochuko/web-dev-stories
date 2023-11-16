@@ -10,6 +10,10 @@ export type CommentType = {
   children: CommentType[];
   parent: string;
   createdAt: string;
+  author: {
+    imageUrl: string;
+    fullName: string;
+  };
 };
 
 export type CommentProps = {
@@ -27,12 +31,20 @@ export default function Comment({
 
   const { user } = useUserContext();
 
+  console.log(comment);
+
   return (
     <div className="flex flex-col text-zinc-700 gap-2 pl-3 mt-6 border-l border-zinc-300">
       <div className="flex gap-2 items-center">
-        <div className="w-10 border-2 border-white rounded-full aspect-square bg-zinc-300"></div>
+        <div className="w-10 border-2 border-white rounded-full aspect-square bg-zinc-300 overflow-hidden">
+          <img
+            src={comment.author.imageUrl}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
         <h4 className="text-lg font-semibold">
-          Great Ochuko -{" "}
+          {comment.author.fullName} -{" "}
           <span className="text-base font-normal text-zinc-600">
             {getDuration(comment.createdAt)}
           </span>

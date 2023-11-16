@@ -31,8 +31,12 @@ export default function ProfilePage() {
     <div className="max-w-6xl w-[90%] mx-auto flex-1 py-4">
       <div className="flex flex-col gap-6 text-zinc-800">
         <div className="flex flex-col items-center gap-4">
-          <div className="rounded-md h-28 aspect-square bg-zinc-500">
-            <img src={user.imageUrl} alt="" />
+          <div className="rounded-md h-28 aspect-square bg-zinc-400 overflow-hidden">
+            <img
+              src={user.imageUrl}
+              alt=""
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex flex-col items-center">
             <h1 className="text-3xl font-semibold">{userProfile?.fullName}</h1>

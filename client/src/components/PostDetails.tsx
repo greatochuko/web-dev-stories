@@ -7,7 +7,13 @@ export default function PostDetails({ post }: { post: PostType }) {
       <p className="mb-4">Blog &gt; {post?.title}</p>
       <h1 className="text-2xl font-semibold">{post?.title}</h1>
       <Link to={"/creators"} className="flex items-center gap-2 my-4">
-        <div className="w-10 h-10 rounded-full bg-zinc-400"></div>
+        <div className="w-10 h-10 rounded-full bg-zinc-400 overflow-hidden">
+          <img
+            src={post.author.imageUrl}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
         <div className="flex flex-col text-sm font-semibold">
           <p>{post?.author.fullName}</p>
           <p>{new Date(post?.createdAt as string).toDateString()}</p>

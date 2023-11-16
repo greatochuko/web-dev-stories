@@ -10,6 +10,11 @@ const commentSchema = new mongoose.Schema(
       ref: "comment",
     },
     parent: { type: mongoose.SchemaTypes.ObjectId, ref: "comment" },
+    author: {
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true,
+      ref: "user",
+    },
   },
   { timestamps: true }
 );

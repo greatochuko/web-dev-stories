@@ -35,7 +35,13 @@ export default function CommentForm({ setComments }: CommentFormProps) {
       className="flex flex-col focus-within:shadow-lg flex-1 gap-2 md:gap-4 border-zinc-400 border rounded-md p-2 md:p-4"
     >
       <div className="flex gap-2 font-semibold items-center">
-        <div className="w-10 rounded-full aspect-square bg-zinc-300 "></div>
+        <div className="w-10 rounded-full aspect-square bg-zinc-300 overflow-hidden">
+          <img
+            src={user.imageUrl}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
         <h2>{user.fullName}</h2>
       </div>
       <textarea

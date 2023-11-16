@@ -12,7 +12,6 @@ export async function getUser(req, res) {
       .populate({
         path: "posts",
         select: "comments title content author reads category banner",
-        populate: { path: "author", select: "fullName" },
       });
     res.json(user);
   } catch (err) {

@@ -35,7 +35,7 @@ export async function getPost(req, res) {
       { new: true }
     ).populate({
       path: "author",
-      select: "fullName",
+      select: "fullName imageUrl",
     });
     res.json(post);
   } catch (err) {
