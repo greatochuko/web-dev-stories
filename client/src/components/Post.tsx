@@ -31,17 +31,17 @@ export default function Post({
 
   return (
     <>
-      <div className="flex flex-col gap-2 bg-white hover:shadow-lg duration-300 group rounded-md overflow-hidden">
+      <div className="flex flex-col gap-2 overflow-hidden duration-300 bg-white rounded-md hover:shadow-lg group">
         <Link to={`/post/${post._id}`}>
-          <div className="w-full aspect-video overflow-hidden bg-zinc-300">
+          <div className="w-full overflow-hidden aspect-video bg-zinc-300">
             <img
               src={post.banner}
               alt=""
-              className="h-full w-full object-cover"
+              className="object-cover w-full h-full"
             />
           </div>
         </Link>
-        <div className="flex flex-col gap-2 mt-1 px-2 pb-4">
+        <div className="flex flex-col gap-2 px-2 pb-4 mt-1">
           <div className="flex items-center gap-2 text-sm">
             <p className="bg-[#eee] rounded-sm px-2 py-1 capitalize">
               {post.category}
@@ -51,13 +51,13 @@ export default function Post({
               <div className="ml-auto">
                 <Link
                   to={`/edit/${post._id}`}
-                  className="px-2 py-1 hover:text-blue-500 duration-200"
+                  className="px-2 py-1 duration-200 hover:text-blue-500"
                 >
                   <i className="fa-solid fa-pen-to-square"></i>
                 </Link>
                 <button
                   onClick={() => setModalIsOpen(true)}
-                  className="px-2 py-1 hover:text-red-600 duration-200"
+                  className="px-2 py-1 duration-200 hover:text-red-600"
                 >
                   <i className="fa-solid fa-trash-can"></i>
                 </button>

@@ -18,6 +18,7 @@ export default function CreatePostPage() {
   const [category, setCategory] = useState("react");
   const [banner, setBanner] = useState<Blob | null>(null);
   const { current: image } = useRef(new Image());
+
   const navigate = useNavigate();
 
   const cannotCreate = !title || !banner || !content;
@@ -111,9 +112,9 @@ export default function CreatePostPage() {
       <div className="relative w-full aspect-[2] overflow-hidden  border border-zinc-200 ">
         <label
           htmlFor="banner"
-          className="w-full h-full absolute cursor-pointer  flex-col gap-2 text-zinc-300 hover:bg-black/50 bg-black/30 flex items-center hover:text-white justify-center duration-300"
+          className="absolute flex flex-col items-center justify-center w-full h-full gap-2 duration-300 cursor-pointer text-zinc-300 hover:bg-black/50 bg-black/30 hover:text-white"
         >
-          <i className="fa-regular fa-image text-5xl"></i>
+          <i className="text-5xl fa-regular fa-image"></i>
           <p className="text-2xl">
             Click to {banner ? "Change" : "Select"} Banner
           </p>
@@ -127,7 +128,7 @@ export default function CreatePostPage() {
           id="banner"
         />
         {banner ? (
-          <img src={image.src} className="h-full w-full object-cover" alt="" />
+          <img src={image.src} className="object-cover w-full h-full" alt="" />
         ) : null}
       </div>
       <input
@@ -161,12 +162,12 @@ export default function CreatePostPage() {
         value={description}
         placeholder="Write a Short Description about your Blog"
         onChange={(e) => setDescription(e.target.value)}
-        className="w-full h-32 outline-none border rounded-md p-2 resize-none mt-10"
+        className="w-full h-32 p-2 mt-10 border rounded-md outline-none resize-none"
       ></textarea>
       <button
         type="submit"
         disabled={loading || (postId ? cannotUpdate : cannotCreate)}
-        className="w-full text-white disabled:cursor-not-allowed font-semibold text-xl rounded-md p-4 bg-zinc-800 disabled:bg-zinc-500"
+        className="w-full p-4 text-xl font-semibold text-white rounded-md disabled:cursor-not-allowed bg-zinc-800 disabled:bg-zinc-500"
       >
         {loading ? "Publishing Your Blog..." : postId ? "Update" : "Publish"}
       </button>
