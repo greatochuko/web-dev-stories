@@ -14,6 +14,7 @@ export type PostType = {
   reads: number;
   comments: [];
   createdAt: string;
+  banner: string;
 };
 
 export default function Post({
@@ -32,7 +33,13 @@ export default function Post({
     <>
       <div className="flex flex-col gap-2 bg-white hover:shadow-lg duration-300 group">
         <Link to={`/post/${post._id}`}>
-          <div className="w-full aspect-video  bg-zinc-300"></div>
+          <div className="w-full aspect-video overflow-hidden bg-zinc-300">
+            <img
+              src={post.banner}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          </div>
         </Link>
         <div className="flex flex-col gap-2 mt-1 px-2 pb-4">
           <div className="flex items-center gap-2 text-sm">

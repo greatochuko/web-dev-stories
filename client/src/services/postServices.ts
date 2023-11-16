@@ -39,7 +39,8 @@ export async function searchPosts(query: string) {
 export async function createPost(
   title: string,
   content: string,
-  category: string
+  category: string,
+  banner: string
 ) {
   const token = localStorage.getItem("token");
   try {
@@ -49,11 +50,13 @@ export async function createPost(
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, content, category }),
+      body: JSON.stringify({ title, content, category, banner }),
     });
     const data = await res.json();
     return data;
   } catch (err) {
+    console.log(err);
+
     return { error: (err as Error).message };
   }
 }
@@ -82,13 +85,36 @@ export async function updatePost(
 }
 
 export async function deletePost(postId: string) {
+  const token = localStorage.getItem("token");
   try {
     const res = await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     const data = await res.json();
     return data;
   } catch (error) {
     return error;
+  }
+}
+
+export async function uploadPhoto(file: Blob | File) {
+  try {
+    const response = await fetch(
+      "https://www.filestackapi.com/api/store/S3?key=ATmxns9QQ2OhhpR6rmotZz",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "image/png",
+        },
+        body: file,
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return { error: (err as Error).message };
   }
 }

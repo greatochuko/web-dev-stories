@@ -11,7 +11,7 @@ export async function getUser(req, res) {
       .select("-password")
       .populate({
         path: "posts",
-        select: "comments title content author reads category",
+        select: "comments title content author reads category banner",
         populate: { path: "author", select: "fullName" },
       });
     res.json(user);

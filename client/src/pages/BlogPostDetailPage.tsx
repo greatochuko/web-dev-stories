@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { Post } from "../components/Post";
+import { PostType } from "../components/Post";
 import { fetchPost } from "../services/postServices";
 import SimilarPosts from "../components/SimilarPosts";
 import CommentSection from "../components/CommentSection";
@@ -11,7 +11,7 @@ import { fetchComments } from "../services/commentServices";
 
 export default function BlogPostDetailPage() {
   const { postId } = useParams<string>();
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<PostType | null>(null);
   const [comments, setComments] = useState<CommentType[] | null>(null);
   const [loading, setLoading] = useState(false);
 

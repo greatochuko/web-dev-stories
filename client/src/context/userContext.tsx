@@ -1,13 +1,13 @@
 import { createContext, useState } from "react";
 import { fetchUser } from "../services/userServices";
-import { Post } from "../components/Post";
+import { PostType } from "../components/Post";
 
 export type User = {
   _id: string;
   fullName: string;
   bio: string;
   email: string;
-  posts: Post[];
+  posts: PostType[];
 };
 
 export type UserProviderValue = {

@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { createPost, fetchPost, updatePost } from "../services/postServices";
+import {
+  createPost,
+  fetchPost,
+  updatePost,
+  uploadPhoto,
+} from "../services/postServices";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -36,8 +41,9 @@ export default function CreatePostPage() {
   async function publishBlog(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const data = await createPost(title, content, category);
-    if (data.error) return;
+    const { url } = await uploadPhoto(banner as Blob);
+    const data = await createPost(title, content, category, url);
+    if (data.error) return setLoading(false);
     navigate(-1);
     setLoading(false);
   }
@@ -62,6 +68,7 @@ export default function CreatePostPage() {
 
       image.src = imageUrl;
       setBannerUrl(imageUrl);
+
       const canvas = document.createElement("canvas");
       const scaleSize = MAX_WIDTH / image.width;
       canvas.height = image.height * scaleSize;
@@ -102,8 +109,7 @@ export default function CreatePostPage() {
           <img src={bannnerUrl} className="h-full w-full object-cover" alt="" />
         ) : null}
       </div>
-      <input
-        type="text"
+      <textarea
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"

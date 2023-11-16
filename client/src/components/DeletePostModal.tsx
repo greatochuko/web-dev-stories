@@ -1,16 +1,19 @@
 import { deletePost } from "../services/postServices";
 
+type DeletePostModalProps = {
+  closeModal: () => void;
+  refreshPosts: () => void;
+  postTitle: string;
+  postId: string;
+};
+
 export default function DeletePostModal({
   closeModal,
   postTitle,
   postId,
   refreshPosts,
-}: {
-  closeModal: () => void;
-  refreshPosts: () => void;
-  postTitle: string;
-  postId: string;
-}) {
+}: DeletePostModalProps) {
+  
   async function handleDeletePost() {
     const data = await deletePost(postId);
     if (data.error) return;

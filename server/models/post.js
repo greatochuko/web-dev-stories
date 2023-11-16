@@ -5,6 +5,7 @@ const postSchema = new mongoose.Schema(
     title: { type: String, required: true },
     content: { type: Object, required: true },
     category: { type: String, required: true },
+    banner: { type: String, required: true },
     author: {
       type: mongoose.SchemaTypes.ObjectId,
       required: true,

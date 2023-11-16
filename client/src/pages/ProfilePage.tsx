@@ -34,7 +34,7 @@ export default function ProfilePage() {
             <h1 className="text-3xl font-semibold">{userProfile?.fullName}</h1>
             <h2>Full Stack Developer</h2>
           </div>
-          {user._id === userProfile._id ? (
+          {user?._id === userProfile._id ? (
             <Link
               to={"/create"}
               className="py-2 px-4 rounded-md bg-zinc-100 border border-zinc-200"
