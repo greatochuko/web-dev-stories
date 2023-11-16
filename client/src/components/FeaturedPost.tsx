@@ -8,8 +8,6 @@ export default function FeaturedPost({
   post: PostType;
   hidden?: boolean;
 }) {
-  console.log(post.author);
-
   return (
     <Link
       to={`/post/${post._id}`}
@@ -18,17 +16,17 @@ export default function FeaturedPost({
         hidden ? "opacity-0" : ""
       }`}
     >
-      <img src={post.banner} alt="" className="w-full h-full object-cover" />
-      <div className="flex flex-col gap-2 text-white bg-black/50 absolute top-0 left-0 w-full h-full px-8 md:px-12 py-4 md:py-12 justify-end">
+      <img src={post.banner} alt="" className="object-cover w-full h-full" />
+      <div className="absolute top-0 left-0 flex flex-col justify-end w-full h-full gap-2 px-8 py-4 text-white bg-black/50 md:px-12 md:py-12">
         <p>{post.category}</p>
-        <h2 className="text-base md:text-2xl font-semibold">{post.title}</h2>
+        <h2 className="text-base font-semibold md:text-2xl">{post.title}</h2>
         <p>{new Date(post.createdAt).toDateString()}</p>
-        <div className="flex gap-2 items-center">
-          <div className="w-10 aspect-square bg-zinc-500 rounded-full overflow-hidden">
+        <div className="flex items-center gap-2">
+          <div className="w-10 overflow-hidden rounded-full aspect-square bg-zinc-500">
             <img
               src={post.author.imageUrl}
               alt=""
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
             />
           </div>
           <h3>{post.author.fullName}</h3>

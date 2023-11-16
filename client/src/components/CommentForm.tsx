@@ -1,8 +1,9 @@
-import { postComment } from "../services/commentServices";
+import { fetchComments, postComment } from "../services/commentServices";
 import { useState } from "react";
 import { CommentType } from "./Comment";
 import useUserContext from "../hooks/useUserContext";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 type CommentFormProps = {
   setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
@@ -22,24 +23,33 @@ export default function CommentForm({ setComments }: CommentFormProps) {
     if (data.error) {
       setLoading(false);
       setmessage("");
+      toast.error("Error: Unable to post Comment");
       return;
     }
     setmessage("");
-    setComments(data);
+    const postData = await fetchComments(postId as string);
+    if (postData.error) {
+      setLoading(false);
+      setmessage("");
+      toast.error("Error: Unable to post Comment");
+      return;
+    }
+    setComments(postData);
+    toast.success("Comment posted Successfully");
     setLoading(false);
   }
 
   return (
     <form
       onSubmit={handleCreateComment}
-      className="flex flex-col focus-within:shadow-lg flex-1 gap-2 md:gap-4 border-zinc-400 border rounded-md p-2 md:p-4"
+      className="flex flex-col flex-1 gap-2 p-2 border rounded-md focus-within:shadow-lg md:gap-4 border-zinc-400 md:p-4"
     >
-      <div className="flex gap-2 font-semibold items-center">
-        <div className="w-10 rounded-full aspect-square bg-zinc-300 overflow-hidden">
+      <div className="flex items-center gap-2 font-semibold">
+        <div className="w-10 overflow-hidden rounded-full aspect-square bg-zinc-300">
           <img
             src={user.imageUrl}
             alt=""
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
         <h2>{user.fullName}</h2>
@@ -48,11 +58,11 @@ export default function CommentForm({ setComments }: CommentFormProps) {
         value={message}
         onChange={(e) => setmessage(e.target.value)}
         placeholder="Comment"
-        className="w-full h-24 p-2 border-b outline-none sm:h-32 resize-none border-zinc-300"
+        className="w-full h-24 p-2 border-b outline-none resize-none sm:h-32 border-zinc-300"
       ></textarea>
       <button
-        disabled={loading}
-        className="px-4 py-2 ml-auto text-white rounded-md bg-zinc-800 hover:bg-zinc-900 duration-200 disabled:bg-zinc-500"
+        disabled={loading || !message}
+        className="px-4 py-2 ml-auto text-white duration-200 rounded-md disabled:cursor-not-allowed bg-zinc-800 hover:bg-zinc-900 disabled:bg-zinc-500"
       >
         {loading ? "Loading" : "Comment"}
       </button>

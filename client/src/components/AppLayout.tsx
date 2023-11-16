@@ -1,6 +1,7 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 // import { useEffect } from "react";
 
 export default function AppLayout() {
@@ -15,6 +16,7 @@ export default function AppLayout() {
       <Navbar />
       <Outlet />
       <Footer />
+      <Toaster />
     </div>
   );
 }

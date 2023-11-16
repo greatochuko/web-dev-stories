@@ -2,6 +2,7 @@ import { useState } from "react";
 import { login, register } from "../services/authServices";
 import { fetchUser } from "../services/userServices";
 import useUserContext from "../hooks/useUserContext";
+import toast from "react-hot-toast";
 
 type AuthModalProps = {
   closeModal: () => void;
@@ -58,6 +59,7 @@ export default function AuthModal({
     const user = await fetchUser();
 
     setUser(user);
+    toast.success("Login Successful");
     closeModal();
   }
 
@@ -78,6 +80,8 @@ export default function AuthModal({
     const user = await fetchUser();
 
     setUser(user);
+    toast.success("Signup Successful");
+
     closeModal();
   }
 
@@ -186,7 +190,7 @@ export default function AuthModal({
             </button>
           </div>
         )}
-        <div className="text-red-500 text-sm">{error}</div>
+        <div className="text-sm text-red-500">{error}</div>
         <button
           type="submit"
           className="p-2 text-white rounded-md bg-zinc-900 disabled:bg-zinc-400 disabled:cursor-not-allowed"

@@ -24,18 +24,16 @@ export default function ProfilePage() {
     getUserProfile();
   }, [userId]);
 
-  console.log(user.imageUrl);
-
   if (!userProfile) return;
   return (
     <div className="max-w-6xl w-[90%] mx-auto flex-1 py-4">
       <div className="flex flex-col gap-6 text-zinc-800">
         <div className="flex flex-col items-center gap-4">
-          <div className="rounded-md h-28 aspect-square bg-zinc-400 overflow-hidden">
+          <div className="overflow-hidden rounded-md h-28 aspect-square bg-zinc-400">
             <img
               src={user.imageUrl}
               alt=""
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
             />
           </div>
           <div className="flex flex-col items-center">
@@ -45,7 +43,7 @@ export default function ProfilePage() {
           {user?._id === userProfile._id ? (
             <Link
               to={"/create"}
-              className="py-2 px-4 rounded-md bg-zinc-100 border border-zinc-200"
+              className="px-4 py-2 border rounded-md bg-zinc-100 border-zinc-200"
             >
               Create New Post
             </Link>

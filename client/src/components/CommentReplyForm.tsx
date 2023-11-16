@@ -2,6 +2,7 @@ import { fetchComments, postComment } from "../services/commentServices";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { CommentType } from "./Comment";
+import toast from "react-hot-toast";
 
 type CommentReplyFormProps = {
   setComments: React.Dispatch<React.SetStateAction<CommentType[] | null>>;
@@ -30,12 +31,13 @@ export default function CommentReplyForm({
     const commentsData = await fetchComments(postId as string);
     setmessage("");
     setComments(commentsData);
+    toast.success("Reply posted Successfully");
     setLoading(false);
     setShowReplyForm(false);
   }
 
   return (
-    <form className="flex gap-2 w-full " onSubmit={handleReplyComment}>
+    <form className="flex w-full gap-2 " onSubmit={handleReplyComment}>
       <input
         type="text"
         className="w-full max-w-xl p-1.5 border rounded-md border-zinc-600"

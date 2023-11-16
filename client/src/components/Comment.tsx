@@ -31,16 +31,14 @@ export default function Comment({
 
   const { user } = useUserContext();
 
-  console.log(comment);
-
   return (
-    <div className="flex flex-col text-zinc-700 gap-2 pl-3 mt-6 border-l border-zinc-300">
-      <div className="flex gap-2 items-center">
-        <div className="w-10 border-2 border-white rounded-full aspect-square bg-zinc-300 overflow-hidden">
+    <div className="flex flex-col gap-2 pl-3 mt-6 border-l text-zinc-700 border-zinc-300">
+      <div className="flex items-center gap-2">
+        <div className="w-10 overflow-hidden border-2 border-white rounded-full aspect-square bg-zinc-300">
           <img
             src={comment.author.imageUrl}
             alt=""
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
         <h4 className="text-lg font-semibold">
@@ -53,7 +51,7 @@ export default function Comment({
       <p>{comment.message}</p>
       {user && (
         <button
-          className="bg-zinc-100 px-2 rounded-md border w-fit border-zinc-200 hover:bg-zinc-200 active:scale-95 duration-100"
+          className="px-2 duration-100 border rounded-md bg-zinc-100 w-fit border-zinc-200 hover:bg-zinc-200 active:scale-95"
           onClick={() => setShowReplyForm((curr) => !curr)}
         >
           Reply

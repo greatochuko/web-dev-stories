@@ -8,6 +8,7 @@ import { PostType } from "../components/Post";
 
 import storage from "../firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import toast from "react-hot-toast";
 
 export default function CreatePostPage() {
   const { postId } = useParams();
@@ -48,6 +49,7 @@ export default function CreatePostPage() {
     const url = await getDownloadURL(uploadTask.ref);
     const data = await createPost(title, content, category, url);
     if (data.error) return setLoading(false);
+    toast.success("Blog post created successfully");
     navigate(-1);
     setLoading(false);
   }
@@ -70,6 +72,7 @@ export default function CreatePostPage() {
       url
     );
     if (data.error) return;
+    toast.success("Blog post created successfully");
     navigate(-1);
     setLoading(false);
   }
