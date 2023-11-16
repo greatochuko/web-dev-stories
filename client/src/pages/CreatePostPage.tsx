@@ -42,10 +42,7 @@ export default function CreatePostPage() {
     e.preventDefault();
     if (cannotCreate) return;
     setLoading(true);
-
-    console.log(banner);
     const storageRef = ref(storage, `/posts/${crypto.randomUUID()}`);
-
     const uploadTask = await uploadBytesResumable(storageRef, banner);
     const url = await getDownloadURL(uploadTask.ref);
     const data = await createPost(title, content, category, url);

@@ -31,7 +31,7 @@ export default function Post({
 
   return (
     <>
-      <div className="flex flex-col gap-2 bg-white hover:shadow-lg duration-300 group">
+      <div className="flex flex-col gap-2 bg-white hover:shadow-lg duration-300 group rounded-md overflow-hidden">
         <Link to={`/post/${post._id}`}>
           <div className="w-full aspect-video overflow-hidden bg-zinc-300">
             <img
