@@ -14,7 +14,19 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+const whitelist = ["https://web-dev-stories.vercel.app/"];
+
+app.use(
+  cors({
+    origin: function (origin, cb) {
+      if (whitelist.indexOf(origin) !== -1) {
+        cb(null, true);
+      } else {
+        cb(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 app.use(express.static("public"));
 app.use(express.json());
 app.use("/api/auth", authRouter);
@@ -28,7 +40,7 @@ const LOCAL_URI = "mongodb://127.0.0.1:27017/web-dev-stories";
 
 async function connectToServer() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(LOCAL_URI);
     app.listen(PORT, () => {
       console.log(`App running at port ${PORT}`);
     });
