@@ -4,7 +4,8 @@ const userSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
   imageUrl: {
     type: String,
-    default: "http://localhost:3000/placeholder-profile-image.png",
+    default:
+      "https://web-dev-stories-server.onrender.com/placeholder-profile-image.png",
   },
   bio: { type: String, default: "" },
   email: { type: String, required: true, unique: true },

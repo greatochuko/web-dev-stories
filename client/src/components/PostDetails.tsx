@@ -6,7 +6,10 @@ export default function PostDetails({ post }: { post: PostType }) {
     <div className="flex-1 py-6 w-full mx-auto">
       <p className="mb-4">Blog &gt; {post?.title}</p>
       <h1 className="text-2xl font-semibold">{post?.title}</h1>
-      <Link to={"/creators"} className="flex items-center gap-2 my-4">
+      <Link
+        to={`/profile/${post.author._id}`}
+        className="flex items-center gap-2 my-4"
+      >
         <div className="w-10 h-10 rounded-full bg-zinc-400 overflow-hidden">
           <img
             src={post.author.imageUrl}

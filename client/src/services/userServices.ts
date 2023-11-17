@@ -19,8 +19,9 @@ export async function fetchUserProfile(userId: string) {
   try {
     const res = await fetch(`${BASE_URL}/user/profile/${userId}`);
     const data = await res.json();
+    if (!data) throw new Error("Error fetching User Profile");
     return data;
-  } catch (error) {
-    return error;
+  } catch (err) {
+    return { error: (err as Error).message };
   }
 }
