@@ -18,7 +18,7 @@ export default function LogoutModal({
     <>
       <div
         onClick={(e) => e.stopPropagation()}
-        className="flex flex-col gap-2 items-center bg-white rounded-md w-[80%] max-w-md overflow-hidden"
+        className="flex flex-col gap-2 items-center bg-white rounded-md w-[80%] max-w-md overflow-hidden animate-zoom-in"
       >
         <div className="w-full p-6">
           <h2 className="text-xl font-semibold">Logout?</h2>

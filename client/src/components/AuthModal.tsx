@@ -194,7 +194,9 @@ export default function AuthModal({
         <button
           type="submit"
           className="p-2 text-white rounded-md bg-zinc-900 disabled:bg-zinc-400 disabled:cursor-not-allowed"
-          disabled={type === "login" ? cannotLogin : cannotRegister}
+          disabled={
+            loading || (type === "login" ? cannotLogin : cannotRegister)
+          }
         >
           {loading ? "Loading" : type === "login" ? "Login" : "Register"}
         </button>

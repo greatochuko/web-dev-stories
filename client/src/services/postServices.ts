@@ -55,8 +55,6 @@ export async function createPost(
     const data = await res.json();
     return data;
   } catch (err) {
-    console.log(err);
-
     return { error: (err as Error).message };
   }
 }

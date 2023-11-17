@@ -33,7 +33,6 @@ export default function ProfilePage() {
     async function getUserProfile() {
       setLoading(true);
       const userProfile = await fetchUserProfile(userId as string);
-      console.log(userProfile);
       if (userProfile.error) {
         toast.error("Something went wrong");
         setError(userProfile.error);

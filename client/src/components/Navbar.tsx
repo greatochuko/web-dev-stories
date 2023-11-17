@@ -49,7 +49,9 @@ export default function Navbar() {
             <li className="list-none ">
               <Link
                 onClick={() => setNavIsOpen(false)}
-                className="p-2 "
+                className={`p-2 ${
+                  pathname.includes("categories") ? "font-semibold" : ""
+                }`}
                 to={"/categories"}
               >
                 Categories
@@ -60,7 +62,9 @@ export default function Navbar() {
                 <li className="list-none ">
                   <Link
                     onClick={() => setNavIsOpen(false)}
-                    className="p-2 "
+                    className={`p-2 ${
+                      pathname.includes("profile") ? "font-semibold" : ""
+                    }`}
                     to={`/profile/${user._id}`}
                   >
                     Profile
