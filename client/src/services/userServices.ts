@@ -1,5 +1,5 @@
-// export const BASE_URL = "http://localhost:3000/api";
-export const BASE_URL = "https://web-dev-stories-server.onrender.com/api";
+export const BASE_URL = "http://localhost:3000/api";
+// export const BASE_URL = "https://web-dev-stories-server.onrender.com/api";
 
 export async function fetchUser() {
   const token = localStorage.getItem("token");

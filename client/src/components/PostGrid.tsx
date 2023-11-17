@@ -5,6 +5,7 @@ import PostWireFrame from "./PostWireFrame";
 type PostGridProps = {
   title?: string;
   url?: string;
+  error: string;
   loading?: boolean;
   grayBg?: boolean;
   posts: PostType[];
@@ -14,6 +15,7 @@ export default function PostGrid({
   posts,
   loading,
   title,
+  error,
   url,
   grayBg = true,
 }: PostGridProps) {
@@ -32,7 +34,9 @@ export default function PostGrid({
           )}
         </h1>
       )}
-      {!posts.length ? (
+      {error ? (
+        <h1 className="w-full py-10 text-center">{error}</h1>
+      ) : !posts.length ? (
         <h1 className="w-full py-10 text-center">
           There are Currently no posts
         </h1>

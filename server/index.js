@@ -7,6 +7,7 @@ import userRouter from "./routes/userRoutes.js";
 import searchRouter from "./routes/searchRoutes.js";
 import cors from "cors";
 import commentRouter from "./routes/commentRoutes.js";
+import newsletterRouter from "./routes/newsletterRoutes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use("/api/posts", postRouter);
 app.use("/api/user", userRouter);
 app.use("/api/search", searchRouter);
 app.use("/api/comments", commentRouter);
+app.use("/api/newsletter", newsletterRouter);
 
 const LOCAL_URI = "mongodb://127.0.0.1:27017/web-dev-stories";
 
