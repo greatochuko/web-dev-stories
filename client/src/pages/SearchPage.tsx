@@ -10,9 +10,10 @@ export default function SearchPage() {
   const query = params.get("q");
   const [sortBy, setSortBy] = useState(params.get("sortBy") || "latest");
   const [category, setCategory] = useState(params.get("category") || "all");
-
   const [posts, setPost] = useState<PostType[] | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   let filteredPosts: PostType[] | null | undefined;
 
   if (category === "all") {
@@ -34,6 +35,10 @@ export default function SearchPage() {
     async function getSearchedPosts() {
       setLoading(true);
       const data = await searchPosts(query as string);
+      if (data.error) {
+        setError(data.error);
+        setLoading(false);
+      }
       setPost(data);
       setLoading(false);
     }
@@ -95,7 +100,7 @@ export default function SearchPage() {
           <PostWireFrame />
         </div>
       ) : posts?.length ? (
-        <PostGrid posts={filteredPosts as PostType[]} />
+        <PostGrid error={error} posts={filteredPosts as PostType[]} />
       ) : (
         <div className="flex justify-center w-full py-4 mb-10">
           No post match the query '{query}'
