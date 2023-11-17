@@ -40,7 +40,7 @@ const LOCAL_URI = "mongodb://127.0.0.1:27017/web-dev-stories";
 
 async function connectToServer() {
   try {
-    await mongoose.connect(LOCAL_URI);
+    await mongoose.connect(process.env.MONGODB_URI);
     app.listen(PORT, () => {
       console.log(`App running at port ${PORT}`);
     });
