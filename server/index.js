@@ -14,12 +14,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const whitelist = ["https://web-dev-stories.vercel.app/"];
+const whitelist = [
+  "https://web-dev-stories.vercel.app",
+  "http://localhost:5173",
+];
 
 app.use(
   cors({
     origin: function (origin, cb) {
-      if (whitelist.indexOf(origin) !== -1) {
+      console.log(origin);
+      if (whitelist.includes(origin) || !origin) {
         cb(null, true);
       } else {
         cb(new Error("Not allowed by CORS"));
