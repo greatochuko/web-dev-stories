@@ -8,6 +8,7 @@ import searchRouter from "./routes/searchRoutes.js";
 import cors from "cors";
 import commentRouter from "./routes/commentRoutes.js";
 import newsletterRouter from "./routes/newsletterRoutes.js";
+// publish
 
 dotenv.config();
 
