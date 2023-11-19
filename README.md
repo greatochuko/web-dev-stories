@@ -33,7 +33,7 @@ Welcome to Web-Dev-Stories, a dynamic and engaging blog web app built with the M
    git clone https://github.com/your-username/web-dev-stories.git
    ```
 
-2. **Install Frontend Dependencies:**
+2. **Install Frontend Dependencies: **
 
    ```bash
    cd web-dev-stories/client
